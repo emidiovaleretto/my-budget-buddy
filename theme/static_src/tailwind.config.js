@@ -45,6 +45,9 @@ module.exports = {
         extend: {
             colors: {
                 'dark-gray': '#1C1A1A',
+                'light-gray': '#2B2B2B',
+                'accent': '#69D2CD',
+                'accent-hover': '#5AC7C1',
             }
         },
     },
