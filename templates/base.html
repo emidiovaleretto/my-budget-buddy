@@ -10,8 +10,12 @@
     {% block 'head' %}{% endblock 'head' %}
   </head>
   <body>
-    <div class="bg-main-color min-h-screen text-white">
+    <div class="bg-dark-gray min-h-screen text-white">
+      {% include 'partials/navbar.html' %}
+
       {% block 'body' %}{% endblock 'body' %}
+
+      
     </div>
 
     {% block postloadjs %}
