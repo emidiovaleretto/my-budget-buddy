@@ -1,25 +1,34 @@
+{% load static %}
 {% load static tailwind_tags %}
 
 <!doctype html>
 <html lang="en">
+  
   <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     {% tailwind_css %}
-    <title>{% block 'title' %}Finance.me{% endblock %}</title>
+    <title>{% block 'title' %}Finance{% endblock %}</title>
+    {% block favicon %}
+    <link rel="shortcut icon" href="{% static 'img/logo.png' %}" type="image/x-icon">
+    {% endblock %}
     {% block 'head' %}{% endblock 'head' %}
   </head>
+
   <body>
     <div class="bg-dark-gray min-h-screen text-white">
       {% include 'partials/navbar.html' %}
 
       {% block 'body' %}{% endblock 'body' %}
-
-      
     </div>
+
+    {% block corejs %}
+    <script src="{% static 'js/scripts.js' %}"></script>
+    {% endblock %}
 
     {% block postloadjs %}
     <script src="https://cdn.jsdelivr.net/npm/flowbite@2.5.1/dist/flowbite.min.js"></script>
     {% endblock %}
+
   </body>
 </html>
