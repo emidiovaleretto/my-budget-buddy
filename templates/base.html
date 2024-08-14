@@ -1,0 +1,21 @@
+{% load static tailwind_tags %}
+
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    {% tailwind_css %}
+    <title>{% block 'title' %}Finance.me{% endblock %}</title>
+    {% block 'head' %}{% endblock 'head' %}
+  </head>
+  <body>
+    <div class="bg-main-color min-h-screen text-white">
+      {% block 'body' %}{% endblock 'body' %}
+    </div>
+
+    {% block postloadjs %}
+    <script src="https://cdn.jsdelivr.net/npm/flowbite@2.5.1/dist/flowbite.min.js"></script>
+    {% endblock %}
+  </body>
+</html>
