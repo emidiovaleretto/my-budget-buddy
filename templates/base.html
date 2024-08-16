@@ -20,9 +20,13 @@
 
     {% include 'partials/navbar.html' %}
 
-    <main class="bg-dark-gray min-h-screen font-sans leading-normal tracking-normal text-white">
+    <main class="bg-dark-gray min-h-screen font-sans leading-normal tracking-normal text-white ">
 
-      {% block 'body' %}{% endblock 'body' %}
+      <div class="max-w-screen-xl mx-auto min-h-screen pb-20">
+
+        {% block 'body' %}{% endblock 'body' %}
+
+      </div>
       
     </main>
 
