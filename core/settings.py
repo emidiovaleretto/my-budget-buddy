@@ -44,7 +44,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
 
     # My apps
-    'profiles',
+    'accounts',
 
     # Tailwindcss
     'tailwind',
