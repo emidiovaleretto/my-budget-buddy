@@ -4,49 +4,52 @@
 
 {% block 'body' %}
 
+{% if messages %}
+        
+    {% for message in messages %}
+        {% include 'partials/alert.html' %}
+    {% endfor %}
+            
+{% endif %}
+
 <div class="grid grid-cols-2 gap-28 pb-12">
 
     <div class="mt-24">
         <h3 class="text-3xl mb-4">Your Accounts</h3>
         <div class="space-y-4">
-            <div class="flex items-center bg-light-gray py-2 px-4 rounded-md">
-                <img class="rounded-full object-fill w-10 h-10 mr-3"
-                    src="https://imgs.search.brave.com/HWDrnKDbjP2E46tMAQMzvlnQZKRMpP5Fpp1scTAzMMo/rs:fit:860:0:0:0/g:ce/aHR0cHM6Ly9zZWVr/bG9nby5jb20vaW1h/Z2VzL0EvYWliLWFs/bGllZC1pcmlzaC1i/YW5rcy1sb2dvLUVD/RDQxRUJDMDUtc2Vl/a2xvZ28uY29tLnBu/Zw"
-                    alt="">
-                <h4 class="flex-1 text-base font-thin">AIB Bank</h4>
-                <p class="text-base font-thin mr-8">€ 800,00</p>
-                <button type="button" class="btn-danger">
-                    <i class="w-4 h-4 text-lg font-bold fa-solid fa-xmark"></i>
-                    <span class="sr-only">X icon to remove the account</span>
-                </button>
-            </div>
-
-            <div class="flex items-center bg-light-gray py-2 px-4 rounded-md">
-                <img class="rounded-full object-fill w-10 h-10 mr-3"
-                    src="https://www.bankofireland.com/app/uploads/assets/BoI_STACKED_LOGO_POS_RGB.jpg"
-                    alt="">
-                <h4 class="flex-1 text-base font-thin">Bank of Ireland</h4>
-                <p class="text-base font-thin mr-8">€ 2300,00</p>
-                <button type="button" class="btn-danger">
-                    <i class="w-4 h-4 text-lg font-bold fa-solid fa-xmark"></i>
-                    <span class="sr-only">X icon to remove the account</span>
-                </button>
-            </div>
+            
+            {% if accounts %}
+                
+                {% for account in accounts %}
+                <div class="flex items-center bg-light-gray py-2 px-4 rounded-md">
+                    <img class="rounded-full object-fill w-10 h-10 mr-3"
+                        src="{{ account.logo.url }}"
+                        alt="{{ account.label }} Logo">
+                    <h4 class="flex-1 text-base font-thin">{{ account.label }}</h4>
+                    <p class="text-base font-thin mr-8">€ {{ account.balance }}</p>
+                    <button type="button" class="btn-danger">
+                        <i class="w-4 h-4 text-lg font-bold fa-solid fa-xmark"></i>
+                        <span class="sr-only">X icon to remove the account</span>
+                    </button>
+                </div>
+                {% endfor %}
+                    
+            {% endif %}
         </div>
         <hr class="h-px my-4 bg-gray-200 border-0 dark:bg-gray-700">
         <div class="flex justify-between items-center">
             <h4 class="text-lg font-thin">Total</h4>
-            <p class="text-lg font-thin">€ 3100,00</p>
+            <p class="text-lg font-thin">€ {{ total }}</p>
         </div>
     </div>
 
     <div class="mt-24">
         <h3 class="text-3xl mb-4">Add New Account</h3>
-        <form action="" method="POST">{% csrf_token %}
+        <form action="{% url 'add_account' %}" method="POST" enctype='multipart/form-data'>{% csrf_token %}
             <div class="space-y-4">
                 <div>
                     <label for="label_account" class="block mb-2 text-base font-medium text-gray-900 dark:text-white">Label Account</label>
-                    <input type="text" id="label_account" class="input-field" placeholder="Revolut" required />
+                    <input type="text" id="label_account" name="label_account" class="input-field" placeholder="Revolut" required />
                 </div>
                 <div>
                     <label for="bank" class="block mb-2 text-base font-medium text-gray-900 dark:text-white">Choose your bank</label>
@@ -88,8 +91,8 @@
                     </div>
                 </div>
                 <div>
-                    <label class="block mb-2 text-base font-medium text-gray-900 dark:text-white" for="file_input">Upload file</label>
-                    <input class="block w-full text-base p-2.5 text-gray-900 border border-gray-300 rounded-lg cursor-pointer bg-gray-50 dark:text-gray-400 focus:outline-none dark:bg-light-gray dark:border-gray-600 dark:placeholder-gray-400" id="file_input" type="file">
+                    <label class="block mb-2 text-base font-medium text-gray-900 dark:text-white" for="logo">Upload file</label>
+                    <input class="block w-full text-base p-2.5 text-gray-900 border border-gray-300 rounded-lg cursor-pointer bg-gray-50 dark:text-gray-400 focus:outline-none dark:bg-light-gray dark:border-gray-600 dark:placeholder-gray-400" id="logo" name="bank_logo" type="file">
                     <p class="mt-2 text-xs text-gray-500 dark:text-gray-400">SVG, PNG, JPG or GIF (MAX. 800x400px).</p>
                 </div>
                 <button type="submit" class="btn-primary">Add Account</button>
