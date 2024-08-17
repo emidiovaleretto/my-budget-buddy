@@ -39,5 +39,5 @@
 }
 
 .alert-success {
-    @apply text-green-800 border-green-300 bg-green-50 dark:text-green-600 dark:bg-green-100 dark:border-green-800
+    @apply text-green-800 border-green-300 bg-green-50 dark:text-green-600 dark:bg-green- dark:border-green-800
 }
