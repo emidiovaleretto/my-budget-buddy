@@ -1,5 +1,5 @@
 from django.urls import reverse
-from django.shortcuts import render, redirect
+from django.shortcuts import render, redirect, get_object_or_404
 from django.contrib import messages
 
 from django.contrib.messages import constants
@@ -59,3 +59,15 @@ def add_account(request):
             'An error occurred while saving your business. Please try again.'
         )
         return redirect(reverse('manage'))
+    
+
+def remove_account(request, account_id):
+    account = get_object_or_404(Account, pk=account_id)
+    account.delete()
+
+    messages.add_message(
+        request,
+        constants.SUCCESS,
+        f'Account {account.label.upper()} successfully deleted.'
+    )
+    return redirect(reverse('manage'))
