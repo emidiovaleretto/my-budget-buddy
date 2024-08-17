@@ -31,4 +31,11 @@ document.addEventListener('DOMContentLoaded', function() {
             otherCategoryDiv.classList.add("hidden");
         }
     });
+
+    const closeIcon = document.getElementById('close-icon');
+
+    closeIcon.addEventListener('click', function() {
+        const alertBox = document.getElementById('alert-box');
+        alertBox.style.display = 'none';
+    });
 })
