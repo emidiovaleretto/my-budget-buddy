@@ -18,5 +18,5 @@ ACCOUNT_TYPE_CHOICES = (
 )
 
 
-from .Category import Category
-from .Account import Account
+from .Categories import Category
+from .Accounts import Account
