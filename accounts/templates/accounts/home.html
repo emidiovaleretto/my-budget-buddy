@@ -30,7 +30,7 @@
 
     </div>    
     <div class="space-y-10">
-        <div class="bg-light-gray rounded-lg p-4">
+        <div class="card">
             <div class="border-l border-l-accent pl-2">
                 <h3 class="text-3xl mb-1">Current balance</h3>
                 <p class="text-base font-thin">€ 800,00</p>
@@ -69,22 +69,22 @@
                 </div>
             </div>
 
-            <a class="block w-full px-6 py-4 text-lg font-extrabold text-center text-cyan-950 bg-accent rounded-lg hover:bg-accent-hover"
+            <a class="btn-primary"
                 href="{% url 'manage' %}">Manage accounts</a>
         </div>
 
-        <div class="bg-light-gray rounded-lg p-4 space-y-4">
+        <div class="card space-y-4">
             <div class="border-l border-l-accent pl-2">
                 <h3 class="text-3xl mb-1">Planning</h3>
             </div>
-            <a class="block w-full px-6 py-4 text-lg font-extrabold text-center text-cyan-950 bg-accent rounded-lg hover:bg-accent-hover"
+            <a class="btn-primary"
                 href="">Manage accounts</a>
         </div>
     </div>
 
     <div>
         <div class="space-y-10">
-            <div class="bg-light-gray rounded-lg p-4">
+            <div class="card">
                 <div class="flex justify-between">
                     <div class="border-l border-l-accent pl-2">
                         <h3 class="text-3xl mb-1">Monthly income</h3>
@@ -101,18 +101,18 @@
                     <p class="text-base font-semibold text-red-500">€ -200,00</p>
                 </div>
 
-                <a class="block w-full px-6 py-4 text-lg font-extrabold text-center text-cyan-950 bg-accent rounded-lg hover:bg-accent-hover"
+                <a class="btn-primary"
                     href="">Budget Manager</a>
             </div>
 
-            <div class="bg-light-gray rounded-lg p-4 space-y-6">
+            <div class="card space-y-6">
                 <div class="pl-2 space-y-4">
                     <h3 class="text-3xl">Financial balance</h3>
 
                     <div>
                         <h4 class="text-lg mb-1">Essential spending</h4>
                         <div class="w-full bg-gray-50 rounded-full">
-                            <div class="bg-accent text-xs font-medium text-cyan-950 text-center p-2 leading-none rounded-full" style="width: 70%"> 70%</div>
+                            <div class="progress-bar" style="width: 70%"> 70%</div>
                         </div>
                         <span class="block text-sm font-thin text-right mt-2">€ 3000,00</span>
                     </div>
@@ -120,17 +120,17 @@
                     <div>
                         <h4 class="text-lg mb-1">Non-essential spending</h4>
                         <div class="w-full bg-gray-50 rounded-full">
-                            <div class="bg-accent text-xs font-medium text-cyan-950 text-center p-2 leading-none rounded-full" style="width: 45%"> 45%</div>
+                            <div class="progress-bar" style="width: 45%"> 45%</div>
                         </div>
                         <span class="block text-sm font-thin text-right mt-2">€ 500,00</span>
                     </div>
 
                 </div>
-                <a class="block w-full px-6 py-4 text-lg font-extrabold text-center text-cyan-950 bg-accent rounded-lg hover:bg-accent-hover"
+                <a class="btn-primary"
                     href="">Manage accounts</a>
             </div>
 
-            <div class="bg-light-gray rounded-lg p-4 space-y-4">
+            <div class="card space-y-4">
                 <div class="pl-2 space-y-4">
                     <h3 class="text-3xl mb-2">Manage accounts</h3>
                     <h4 class="text-lg font-medium">Upcoming bills</h4>
@@ -187,7 +187,7 @@
                         </div>
                     </div>
                 </div>
-                <a class="block w-full px-6 py-4 text-lg font-extrabold text-center text-cyan-950 bg-accent rounded-lg hover:bg-accent-hover"
+                <a class="btn-primary"
                     href="">See More</a>
             </div>
         </div>

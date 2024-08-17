@@ -4,6 +4,181 @@
 
 {% block 'body' %}
 
+<div class="grid grid-cols-2 gap-28 pb-12">
 
+    <div class="mt-24">
+        <h3 class="text-3xl mb-4">Your Accounts</h3>
+        <div class="space-y-4">
+            <div class="flex items-center bg-light-gray py-2 px-4 rounded-md">
+                <img class="rounded-full object-fill w-10 h-10 mr-3"
+                    src="https://imgs.search.brave.com/HWDrnKDbjP2E46tMAQMzvlnQZKRMpP5Fpp1scTAzMMo/rs:fit:860:0:0:0/g:ce/aHR0cHM6Ly9zZWVr/bG9nby5jb20vaW1h/Z2VzL0EvYWliLWFs/bGllZC1pcmlzaC1i/YW5rcy1sb2dvLUVD/RDQxRUJDMDUtc2Vl/a2xvZ28uY29tLnBu/Zw"
+                    alt="">
+                <h4 class="flex-1 text-base font-thin">AIB Bank</h4>
+                <p class="text-base font-thin mr-8">€ 800,00</p>
+                <button type="button" class="btn-danger">
+                    <i class="w-4 h-4 text-lg font-bold fa-solid fa-xmark"></i>
+                    <span class="sr-only">X icon to remove the account</span>
+                </button>
+            </div>
+
+            <div class="flex items-center bg-light-gray py-2 px-4 rounded-md">
+                <img class="rounded-full object-fill w-10 h-10 mr-3"
+                    src="https://www.bankofireland.com/app/uploads/assets/BoI_STACKED_LOGO_POS_RGB.jpg"
+                    alt="">
+                <h4 class="flex-1 text-base font-thin">Bank of Ireland</h4>
+                <p class="text-base font-thin mr-8">€ 2300,00</p>
+                <button type="button" class="btn-danger">
+                    <i class="w-4 h-4 text-lg font-bold fa-solid fa-xmark"></i>
+                    <span class="sr-only">X icon to remove the account</span>
+                </button>
+            </div>
+        </div>
+        <hr class="h-px my-4 bg-gray-200 border-0 dark:bg-gray-700">
+        <div class="flex justify-between items-center">
+            <h4 class="text-lg font-thin">Total</h4>
+            <p class="text-lg font-thin">€ 3100,00</p>
+        </div>
+    </div>
+
+    <div class="mt-24">
+        <h3 class="text-3xl mb-4">Add New Account</h3>
+        <form action="" method="POST">{% csrf_token %}
+            <div class="space-y-4">
+                <div>
+                    <label for="label_account" class="block mb-2 text-base font-medium text-gray-900 dark:text-white">Label Account</label>
+                    <input type="text" id="label_account" class="input-field" placeholder="Revolut" required />
+                </div>
+                <div>
+                    <label for="bank" class="block mb-2 text-base font-medium text-gray-900 dark:text-white">Choose your bank</label>
+                    <select id="bank" name="bank" class="mb-4 input-field">
+                        <option value="aib">AIB (Allied Irish Banks)</option>
+                        <option value="boi">Bank of Ireland</option>
+                        <option value="ptsb">Permanent TSB</option>
+                        <option value="revolut">Revolut</option>
+                        <option value="n26">N26</option>
+                        <option value="other">Other</option>
+                    </select>
+                
+                    <div id="otherBankDiv" class="hidden">
+                        <label for="otherBank" class="block mb-2 text-base font-medium text-gray-900 dark:text-white">Please specify:</label>
+                        <input type="text" id="otherBank" name="otherBank" class="input-field">
+                    </div>
+                </div>
+                <div>
+                    <label for="bank_type" class="block mb-2 text-base font-medium text-gray-900 dark:text-white">Type</label>
+                    <select id="bank_type" name="bank_type" class="mb-4 input-field">
+                        <option value="personal">Personal Account</option>
+                        <option value="business">Business Entity</option>
+                    </select>
+                </div>      
+                <div class="flex gap-6">
+                    <div class="w-full">
+                        <label for="balance" class="block mb-2 text-base font-medium text-gray-900 dark:text-white">Balance</label>
+                        <input type="number" id="balance" name="balance" class="input-field" placeholder="€ 0,00" required />
+                    </div>
+                    <div class="w-full">
+                        <label for="currency" class="block mb-2 text-base font-medium text-gray-900 dark:text-white">Currency</label>
+                        <select id="currency" name="currency" class="mb-4 input-field">
+                            <option value="eur">Euro (€)</option>
+                            <option value="usd">US Dollar ($)</option>
+                            <option value="gbp">British Pound (£)</option>
+                        </select>
+                    </div>
+                </div>
+                <div>
+                    <label class="block mb-2 text-base font-medium text-gray-900 dark:text-white" for="file_input">Upload file</label>
+                    <input class="block w-full text-base p-2.5 text-gray-900 border border-gray-300 rounded-lg cursor-pointer bg-gray-50 dark:text-gray-400 focus:outline-none dark:bg-light-gray dark:border-gray-600 dark:placeholder-gray-400" id="file_input" type="file">
+                    <p class="mt-2 text-xs text-gray-500 dark:text-gray-400">SVG, PNG, JPG or GIF (MAX. 800x400px).</p>
+                </div>
+                <button type="submit" class="btn-primary">Add Account</button>
+            </div>
+        </form>
+    </div>
+</div>
+
+<hr class="h-px my-4 bg-gray-200 border-0 dark:bg-gray-700">
+
+<div class="flex justify-between gap-28">
+    <div class="w-full mt-24">
+        <h3 class="text-3xl mb-4">New Category</h3>
+        <form action="" method="POST">{% csrf_token %}
+            <div class="space-y-4">
+                <label for="expenseCategory" class="block mb-2 text-base font-medium text-gray-900 dark:text-white">Choose an expense category:</label>
+                <select id="expenseCategory" name="expenseCategory" class="input-field">
+                    <option value="rent">Rent/Mortgage</option>
+                    <option value="utilities">Utilities (Electricity, Water, Gas)</option>
+                    <option value="groceries">Groceries</option>
+                    <option value="transportation">Transportation (Fuel, Public Transport)</option>
+                    <option value="insurance">Insurance</option>
+                    <option value="healthcare">Healthcare</option>
+                    <option value="education">Education</option>
+                    <option value="entertainment">Entertainment</option>
+                    <option value="dining">Dining Out</option>
+                    <option value="shopping">Shopping (Clothing, Personal Items)</option>
+                    <option value="travel">Travel</option>
+                    <option value="savings">Savings & Investments</option>
+                    <option value="debt">Debt Repayment</option>
+                    <option value="charity">Charity & Donations</option>
+                    <option value="other">Other</option>
+                </select>
+
+                <div id="otherCategoryDiv" class="hidden">
+                    <label for="otherCategory" class="block mb-2 text-base font-medium text-gray-900 dark:text-white">Please specify:</label>
+                    <input type="text" id="otherCategory" name="otherCategory" class="input-field">
+                </div>
+
+                <div class="flex items-center me-4">
+                    <input id="essential-checkbox" type="checkbox" value="" class="checkbox">
+                    <label for="essential-checkbox" class="ms-2 text-sm font-medium text-gray-900 dark:text-gray-300">Is this category essential?</label>
+                </div>
+                <button type="submit" class="btn-primary">Add Category</button>
+            </div>
+        </form>
+    </div>
+
+    <div class="w-full mt-24">
+        <h3 class="text-3xl mb-14">My Categories</h3>
+        <div class="relative overflow-x-auto shadow-md sm:rounded-lg space-y-4">
+            <table class="w-full text-sm text-center rtl:text-right text-gray-500 dark:text-teal-950">
+                <thead class="text-xs text-teal-950 uppercase bg-gray-50 dark:bg-accent dark:text-teal-950">
+                    <tr>
+                        <th scope="col" class="px-6 py-3">
+                            Catefories
+                        </th>
+                        <th scope="col" class="px-6 py-3">
+                            Essential
+                        </th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr class="border-t dark:bg-light-gray dark:border-gray-700">
+                        <th scope="row" class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">
+                            Rent/Mortgage
+                        </th>
+                        <td class="px-6 py-4">
+                            <span class="badge-success">Yes</span>
+                        </td>
+                    </tr>
+                    <tr class="border-t dark:bg-light-gray dark:border-gray-700">
+                        <th scope="row" class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">
+                            Utilities (Electricity, Water, Gas)
+                        </th>
+                        <td class="px-6 py-4">
+                            <span class="badge-success">Yes</span>
+                        </td>
+                    </tr>
+                    <tr class="border-t dark:bg-light-gray dark:border-gray-700">
+                        <th scope="row" class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">
+                            Groceries
+                        </th>
+                        <td class="px-6 py-4">
+                            <span class="badge-danger">No</span>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
 
 {% endblock %}
