@@ -3,8 +3,6 @@ document.addEventListener('DOMContentLoaded', function() {
     let currentYear = new Date().getFullYear();
     document.getElementById('currentYear').textContent = currentYear;
 
-    console.log('scripts.js loaded');
-
     let selectBox = document.getElementById("bank");
     let otherBankInput = document.getElementById("otherBank");
 
@@ -32,10 +30,11 @@ document.addEventListener('DOMContentLoaded', function() {
         }
     });
 
-    const closeIcon = document.getElementById('close-icon');
+    let toastAlert = document.getElementById("toast-alert");
 
-    closeIcon.addEventListener('click', function() {
-        const alertBox = document.getElementById('alert-box');
-        alertBox.style.display = 'none';
-    });
+    if (toastAlert) {
+        setTimeout(function() {
+            toastAlert.classList.add("hidden");
+        }, 5000);
+    }
 })
