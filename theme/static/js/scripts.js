@@ -1,5 +1,5 @@
 document.addEventListener('DOMContentLoaded', function() {
-    
+
     let currentYear = new Date().getFullYear();
     document.getElementById('currentYear').textContent = currentYear;
 
@@ -7,10 +7,10 @@ document.addEventListener('DOMContentLoaded', function() {
     let otherBankInput = document.getElementById("otherBank");
 
     let expenseCategory = document.getElementById("expenseCategory");
+    let otherCategoryDiv = document.getElementById("otherCategoryDiv");
     let otherCategory = document.getElementById("otherCategory");
-    
+
     selectBox.addEventListener("change", function() {
-        console.log(selectBox.value);
         let otherBankDiv = document.getElementById("otherBankDiv");
         if (selectBox.value === "other") {
             otherBankDiv.classList.remove("hidden");
@@ -21,7 +21,6 @@ document.addEventListener('DOMContentLoaded', function() {
     });
 
     expenseCategory.addEventListener("change", function() {
-        console.log(expenseCategory.value);
         if (expenseCategory.value === "other") {
             otherCategoryDiv.classList.remove("hidden");
             otherCategory.focus();
@@ -31,10 +30,21 @@ document.addEventListener('DOMContentLoaded', function() {
     });
 
     let toastAlert = document.getElementById("toast-alert");
-
     if (toastAlert) {
         setTimeout(function() {
             toastAlert.classList.add("hidden");
         }, 5000);
     }
-})
+});
+
+document.querySelectorAll('.btn-danger').forEach(button => {
+    button.addEventListener('click', function(e) {
+        e.preventDefault();
+        const accountId = this.getAttribute('data-account-id');
+        const accountIdField = document.getElementById('account-id-field');
+        accountIdField.value = parseInt(accountId);
+
+        const form = document.getElementById('delete-account-form');
+        form.setAttribute('action', `/accounts/remove_account/${accountId}/`);
+    });
+});
