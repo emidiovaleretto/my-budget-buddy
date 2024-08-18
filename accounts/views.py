@@ -20,7 +20,7 @@ def manage(request):
 def add_account(request):
     if request.method == 'GET':
         return render(request, 'accounts/add_account.html')
-    
+
     label = request.POST.get('label_account')
     bank = request.POST.get('bank')
     account_type = request.POST.get('bank_type')
@@ -35,7 +35,7 @@ def add_account(request):
             'Please fill in all required fields.'
         )
         return redirect(reverse('manage'))
-    
+
     try:
         account = Account(
             label=label,
@@ -43,7 +43,7 @@ def add_account(request):
             account_type=account_type,
             balance=balance,
             logo=logo)
-        
+
         account.save()
         messages.add_message(
             request,
@@ -54,15 +54,15 @@ def add_account(request):
 
     except Exception:
         messages.add_message(
-            request, 
+            request,
             constants.ERROR,
             'An error occurred while saving your business. Please try again.'
         )
         return redirect(reverse('manage'))
-    
+
 
 def remove_account(request, account_id):
-    account = get_object_or_404(Account, pk=account_id)
+    account = get_object_or_404(Account, id=account_id)
     account.delete()
 
     messages.add_message(

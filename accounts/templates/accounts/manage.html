@@ -18,26 +18,25 @@
         <h3 class="text-3xl mb-4">Your Accounts</h3>
         {% if accounts %}
         {% for account in accounts %}
-        <div class="space-y-4">
+        <div class="mb-2">
             <div class="flex items-center bg-light-gray py-2 px-4 rounded-md">
                 <img class="rounded-full object-fill w-10 h-10 mr-3"
                     src="{{ account.logo.url }}"
                     alt="{{ account.label }} Logo">
                 <h4 class="flex-1 text-base font-thin">{{ account.label }}</h4>
                 <p class="text-base font-thin mr-8">€ {{ account.balance }}</p>
-                <button type="button" data-modal-target="popup-modal" data-modal-toggle="popup-modal" class="btn-danger">
+                <button type="button" data-modal-target="popup-modal" data-modal-toggle="popup-modal" data-account-id="{{ account.id }}" class="btn-danger">
                     <i class="w-4 h-4 text-lg font-bold fa-solid fa-xmark"></i>
                     <span class="sr-only">X icon to remove the account</span>
                 </button>
-                {% include 'partials/modal.html' %}
             </div>
         </div>
+        {% endfor %}
         <hr class="h-px my-4 bg-gray-200 border-0 dark:bg-gray-700">
         <div class="flex justify-between items-center">
             <h4 class="text-lg font-thin">Total</h4>
             <p class="text-lg font-thin">€ {{ total }}</p>
         </div>
-        {% endfor %}
         {% else %}
         <div class="py-40 px-32 mt-10 text-center rounded-md border bg-light-gray border-gray-600 placeholder-gray-400 text-white">
             <i class="w-12 h-12 text-gray-400 font-black text-3xl fa-solid fa-wallet"></i>
@@ -189,4 +188,5 @@
     </div>
 </div>
 
+{% include 'partials/modal.html' %}
 {% endblock %}
