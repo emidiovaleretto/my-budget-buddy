@@ -10,4 +10,9 @@ urlpatterns = [
         'remove_account/<int:account_id>/',
         views.remove_account,
         name='remove_account'),
+    path('add_category/', views.add_category, name='add_category'),
+    path(
+        'remove_category/<int:category_id>/',
+        views.remove_category,
+        name='remove_category'),
 ]
