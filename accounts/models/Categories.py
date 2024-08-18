@@ -1,3 +1,4 @@
+from django.utils.safestring import mark_safe
 from accounts.models import *
 
 
@@ -10,3 +11,9 @@ class Category(models.Model):
 
     def __str__(self):
         return self.name
+
+    @property
+    def get_essential_status(self):
+        if self.is_essential:
+            return mark_safe('<span class="badge-success">Yes</span>')
+        return mark_safe('<span class="badge-danger">No</span>')
