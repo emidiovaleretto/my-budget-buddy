@@ -4,6 +4,7 @@ from django.contrib import messages
 
 from django.contrib.messages import constants
 from accounts.models import Account
+from accounts.models import Category
 
 
 def home(request):
@@ -12,8 +13,13 @@ def home(request):
 
 def manage(request):
     accounts = Account.objects.all()
+    categories = Category.objects.all()
     total = sum([account.balance for account in accounts])
-    context = {'accounts': accounts, 'total': total}
+    context = {
+        'accounts': accounts,
+        'categories': categories,
+        'total': total
+    }
     return render(request, 'accounts/manage.html', context=context)
 
 
@@ -71,3 +77,37 @@ def remove_account(request, account_id):
         f'Account {account.label.upper()} successfully deleted.'
     )
     return redirect(reverse('manage'))
+
+
+def add_category(request):
+    if request.method == 'POST':
+        category_name = request.POST.get('category-name')
+        is_essential = bool(request.POST.get('is-essential'))
+
+        try:
+            category = Category(
+                name=category_name,
+                is_essential=is_essential
+            )
+            category.save()
+            messages.add_message(
+                request,
+                constants.SUCCESS,
+                'Category successfully added.'
+            )
+            return redirect(reverse('manage'))
+
+        except Exception:
+            messages.add_message(
+                request,
+                constants.ERROR,
+                'An error occurred while adding the category. Please try again.'
+            )
+            return redirect(reverse('manage'))
+
+    return render(request, 'accounts/manage.html')
+
+
+
+def remove_category(request, category_id):
+    pass
