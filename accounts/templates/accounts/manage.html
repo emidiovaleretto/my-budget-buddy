@@ -25,10 +25,11 @@
                     alt="{{ account.label }} Logo">
                 <h4 class="flex-1 text-base font-thin">{{ account.label }}</h4>
                 <p class="text-base font-thin mr-8">€ {{ account.balance }}</p>
-                <a href="{% url 'remove_account' account.id %}" class="btn-danger">
+                <button type="button" data-modal-target="popup-modal" data-modal-toggle="popup-modal" class="btn-danger">
                     <i class="w-4 h-4 text-lg font-bold fa-solid fa-xmark"></i>
                     <span class="sr-only">X icon to remove the account</span>
-                </a>
+                </button>
+                {% include 'partials/modal.html' %}
             </div>
         </div>
         <hr class="h-px my-4 bg-gray-200 border-0 dark:bg-gray-700">
