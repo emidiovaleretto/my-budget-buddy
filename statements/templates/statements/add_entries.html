@@ -11,7 +11,7 @@
             <div class="grid gap-4 sm:grid-cols-2 sm:gap-6">
                 <div class="w-full">
                     <label for="name" class="label">Product Name</label>
-                    <input type="text" name="name" id="name" class="input-field" placeholder="Type product name" required="">
+                    <input type="text" name="name" id="name" class="input-field" placeholder="Type product name" required>
                 </div>
                 {% if categories %}
                 <div class="w-full">
@@ -26,7 +26,7 @@
                 {% endif %}
                 <div class="w-full">
                     <label for="date" class="label">Date</label>
-                    <input type="date" name="date" value="{{ current_date }}" id="date" class="input-field" required="">
+                    <input type="date" name="date" value="{{ current_date|date:'Y-m-d' }}" id="date" class="input-field">
                 </div>
                 <div>
                     <label for="account" class="label">Account</label>
@@ -46,11 +46,11 @@
 
                 <div class="flex">
                     <div class="flex items-center me-4">
-                        <input id="inline-radio" type="radio" value="" name="inline-radio-group" class="w-4 h-4 text-accent bg-gray-100 border-gray-300 focus:ring-blue-500 dark:focus:ring-acctext-accent dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600">
+                        <input id="inline-radio" type="radio" value="IN" name="inline-radio-group" class="w-4 h-4 text-accent bg-gray-100 border-gray-300 focus:ring-blue-500 dark:focus:ring-acctext-accent dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600">
                         <label for="inline-radio" class="ms-2 text-sm font-medium text-gray-900 dark:text-gray-300">Income</label>
                     </div>
                     <div class="flex items-center me-4">
-                        <input id="inline-2-radio" type="radio" value="" name="inline-radio-group" class="w-4 h-4 text-accent bg-gray-100 border-gray-300 focus:ring-blue-500 dark:focus:ring-acctext-accent dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600">
+                        <input id="inline-2-radio" type="radio" value="EX" name="inline-radio-group" class="w-4 h-4 text-accent bg-gray-100 border-gray-300 focus:ring-blue-500 dark:focus:ring-acctext-accent dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600">
                         <label for="inline-2-radio" class="ms-2 text-sm font-medium text-gray-900 dark:text-gray-300">Expense</label>
                     </div>
                 </div>
