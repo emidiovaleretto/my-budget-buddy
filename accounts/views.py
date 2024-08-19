@@ -6,9 +6,17 @@ from django.contrib.messages import constants
 from accounts.models import Account
 from accounts.models import Category
 
+from .utils import calculate_total
+
 
 def home(request):
-    return render(request, 'accounts/home.html')
+    accounts = Account.objects.all()
+    total_balance = calculate_total(accounts, 'balance')
+    context = {
+        'accounts': accounts,
+        'total_balance': total_balance
+    }
+    return render(request, 'accounts/home.html', context=context)
 
 
 def manage(request):
