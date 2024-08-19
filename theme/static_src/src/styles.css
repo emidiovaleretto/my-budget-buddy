@@ -10,6 +10,14 @@
     @apply bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-accent focus:border-blue-500 block w-full py-4 px-4 dark:bg-light-gray dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-accent dark:focus:border-accent;
 }
 
+.title {
+    @apply mb-4 text-3xl font-medium text-gray-900 dark:text-white
+}
+
+.label {
+    @apply block mb-2 text-base font-medium text-gray-900 dark:text-white
+}
+
 .btn-primary {
     @apply block w-full text-center bg-accent hover:bg-accent-hover text-teal-950 font-bold px-6 py-4 rounded-md
 }
