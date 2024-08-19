@@ -1,0 +1,54 @@
+{% extends 'base.html' %}
+
+{% load static %}
+
+{% block 'body' %}
+
+<section>
+    <div class="py-8 px-4 mx-auto max-w-2xl lg:py-16">
+        <h2 class="title">Add your Income and Expenses</h2>
+        <form action="#" method="POST"> {% csrf_token %}
+            <div class="grid gap-4 sm:grid-cols-2 sm:gap-6">
+                <div class="w-full">
+                    <label for="name" class="label">Product Name</label>
+                    <input type="text" name="name" id="name" class="input-field" placeholder="Type product name" required="">
+                </div>
+                {% if categories %}
+                <div class="w-full">
+                    <label for="expenseCategory" class="label">Category:</label>
+                    <select id="expenseCategory" name="category-name" class="input-field">
+                        <option selected="">Select the Category</option>
+                        {% for category in categories %}
+                        <option value="{{ category.name }}">{{ category.name }}</option>
+                        {% endfor %}
+                    </select>
+                </div>
+                {% endif %}
+                <div class="w-full">
+                    <label for="date" class="label">Date</label>
+                    <input type="date" name="date" value="{{ current_date }}" id="date" class="input-field" required="">
+                </div>
+                <div>
+                    <label for="account" class="label">Account</label>
+                    {% if accounts %}
+                    <select id="account" class="input-field">
+                        <option selected="">Select the Account</option>
+                        {% for account in accounts %}
+                        <option value="{{ account.label }}">{{ account.label }}</option>
+                        {% endfor %}
+                    </select>
+                    {% endif %}            
+                </div>
+                <div class="sm:col-span-2">
+                    <label for="description" class="label">Description</label>
+                    <textarea id="description" rows="8" class="input-field resize-none" placeholder="Your description here"></textarea>
+                </div>
+            </div>
+            <button type="submit" class="inline-flex items-center px-5 py-2.5 mt-4 sm:mt-6 text-sm font-bold text-center text-teal-950 bg-accent rounded-lg focus:ring-4 focus:ring-primary-200 dark:focus:ring-primary-900 hover:bg-accent-hover">
+                Add product
+            </button>
+        </form>
+    </div>
+  </section>
+
+{% endblock %}
