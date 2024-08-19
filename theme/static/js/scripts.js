@@ -6,10 +6,6 @@ document.addEventListener('DOMContentLoaded', function() {
     let selectBox = document.getElementById("bank");
     let otherBankInput = document.getElementById("otherBank");
 
-    let expenseCategory = document.getElementById("expenseCategory");
-    let otherCategoryDiv = document.getElementById("otherCategoryDiv");
-    let otherCategory = document.getElementById("otherCategory");
-
     selectBox.addEventListener("change", function() {
         let otherBankDiv = document.getElementById("otherBankDiv");
         if (selectBox.value === "other") {
@@ -17,15 +13,6 @@ document.addEventListener('DOMContentLoaded', function() {
             otherBankInput.focus();
         } else {
             otherBankDiv.classList.add("hidden");
-        }
-    });
-
-    expenseCategory.addEventListener("change", function() {
-        if (expenseCategory.value === "other") {
-            otherCategoryDiv.classList.remove("hidden");
-            otherCategory.focus();
-        } else {
-            otherCategoryDiv.classList.add("hidden");
         }
     });
 
