@@ -40,7 +40,7 @@
         {% else %}
         <div class="py-40 px-32 mt-10 text-center rounded-md border bg-light-gray border-gray-600 placeholder-gray-400 text-white">
             <i class="w-12 h-12 text-gray-400 font-black text-3xl fa-solid fa-wallet"></i>
-            <p class="text-lg font-thin">You don't have any accounts yet.</p>
+            <p class="text-base font-thin">You don't have any accounts yet.</p>
         </div>
         {% endif %}
     </div>
@@ -108,25 +108,24 @@
 <div class="flex justify-between gap-28">
     <div class="w-full mt-24">
         <h3 class="text-3xl mb-4">New Category</h3>
-        <form action="" method="POST">{% csrf_token %}
+        <form id="expenseCategoryForm" action="{% url 'add_category' %}" method="POST">{% csrf_token %}
             <div class="space-y-4">
                 <label for="expenseCategory" class="block mb-2 text-base font-medium text-gray-900 dark:text-white">Choose an expense category:</label>
-                <select id="expenseCategory" name="expenseCategory" class="input-field">
-                    <option value="rent">Rent/Mortgage</option>
-                    <option value="utilities">Utilities (Electricity, Water, Gas)</option>
-                    <option value="groceries">Groceries</option>
-                    <option value="transportation">Transportation (Fuel, Public Transport)</option>
-                    <option value="insurance">Insurance</option>
-                    <option value="healthcare">Healthcare</option>
-                    <option value="education">Education</option>
-                    <option value="entertainment">Entertainment</option>
-                    <option value="dining">Dining Out</option>
-                    <option value="shopping">Shopping (Clothing, Personal Items)</option>
-                    <option value="travel">Travel</option>
-                    <option value="savings">Savings & Investments</option>
-                    <option value="debt">Debt Repayment</option>
-                    <option value="charity">Charity & Donations</option>
-                    <option value="other">Other</option>
+                <select id="expenseCategory" name="category-name" class="input-field">
+                    <option value="Rent/Mortgage">Rent/Mortgage</option>
+                    <option value="Utilities (Electricity, Water, Gas)">Utilities (Electricity, Water, Gas)</option>
+                    <option value="Groceries">Groceries</option>
+                    <option value="Transportation (Fuel, Public Transport)">Transportation (Fuel, Public Transport)</option>
+                    <option value="Insurance">Insurance</option>
+                    <option value="Healthcare">Healthcare</option>
+                    <option value="Education">Education</option>
+                    <option value="Entertainment">Entertainment</option>
+                    <option value="Dining Out">Dining Out</option>
+                    <option value="Shopping (Clothing, Personal Items)">Shopping (Clothing, Personal Items)</option>
+                    <option value="Travel">Travel</option>
+                    <option value="Savings & Investments">Savings & Investments</option>
+                    <option value="Debt Repayment">Debt Repayment</option>
+                    <option value="Charity & Donations">Charity & Donations</option>
                 </select>
 
                 <div id="otherCategoryDiv" class="hidden">
@@ -135,7 +134,7 @@
                 </div>
 
                 <div class="flex items-center me-4">
-                    <input id="essential-checkbox" type="checkbox" value="" class="checkbox">
+                    <input id="essential-checkbox" type="checkbox" name="is-essential" value="is-essential" class="checkbox">
                     <label for="essential-checkbox" class="ms-2 text-sm font-medium text-gray-900 dark:text-gray-300">Is this category essential?</label>
                 </div>
                 <button type="submit" class="btn-primary">Add Category</button>
@@ -146,11 +145,12 @@
     <div class="w-full mt-24">
         <h3 class="text-3xl mb-14">My Categories</h3>
         <div class="relative overflow-x-auto shadow-md sm:rounded-lg space-y-4">
+            {% if categories %}
             <table class="w-full text-sm text-center rtl:text-right text-gray-500 dark:text-teal-950">
                 <thead class="text-xs text-teal-950 uppercase bg-gray-50 dark:bg-accent dark:text-teal-950">
                     <tr>
                         <th scope="col" class="px-6 py-3">
-                            Catefories
+                            Categories
                         </th>
                         <th scope="col" class="px-6 py-3">
                             Essential
@@ -158,32 +158,26 @@
                     </tr>
                 </thead>
                 <tbody>
+                       
+                    {% for category in categories %}
+                        
                     <tr class="border-t dark:bg-light-gray dark:border-gray-700">
                         <th scope="row" class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">
-                            Rent/Mortgage
+                            {{ category.name }}
                         </th>
                         <td class="px-6 py-4">
-                            <span class="badge-success">Yes</span>
+                            {{ category.get_essential_status }}
                         </td>
                     </tr>
-                    <tr class="border-t dark:bg-light-gray dark:border-gray-700">
-                        <th scope="row" class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">
-                            Utilities (Electricity, Water, Gas)
-                        </th>
-                        <td class="px-6 py-4">
-                            <span class="badge-success">Yes</span>
-                        </td>
-                    </tr>
-                    <tr class="border-t dark:bg-light-gray dark:border-gray-700">
-                        <th scope="row" class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">
-                            Groceries
-                        </th>
-                        <td class="px-6 py-4">
-                            <span class="badge-danger">No</span>
-                        </td>
-                    </tr>
+                    {% endfor %}
                 </tbody>
             </table>
+            {% else %}
+            <div class="py-4 px-3 text-center rounded-md border bg-light-gray border-gray-600 placeholder-gray-400 text-white">
+                <i class="w-12 h-12 text-gray-400 font-black text-3xl fa-solid fa-layer-group"></i>
+                <p class="text-base font-thin">You don't have any categories yet.</p>
+            </div>
+            {% endif %}
         </div>
     </div>
 </div>
