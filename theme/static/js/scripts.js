@@ -16,6 +16,28 @@ document.addEventListener('DOMContentLoaded', function() {
         }
     });
 
+    let expenseCategory = document.getElementById("expenseCategory");
+    let otherCategoryDiv = document.getElementById("otherCategoryDiv")
+    let otherCategoryInput = document.getElementById("otherCategoryInput")
+    let form = document.querySelector('form');
+
+    expenseCategory.addEventListener("change", function() {
+        console.log(expenseCategory.value)
+        if (expenseCategory.value === "other") {
+            otherCategoryDiv.classList.remove("hidden");
+            otherCategoryInput.focus();
+        } else {
+            otherCategoryDiv.classList.add("hidden");
+        }
+    });
+
+    form.addEventListener('submit', function(event) {
+        if (expenseCategory.value === "other" && otherCategoryInput.value.trim() !== "") {
+            expenseCategory.value = otherCategoryInput.value.trim();
+        }
+    });
+
+
     let toastAlert = document.getElementById("toast-alert");
     if (toastAlert) {
         setTimeout(function() {

@@ -108,7 +108,8 @@
 <div class="flex justify-between gap-28">
     <div class="w-full mt-24">
         <h3 class="text-3xl mb-4">New Category</h3>
-        <form id="expenseCategoryForm" action="{% url 'add_category' %}" method="POST">{% csrf_token %}
+        <form id="expenseCategoryForm" action="{% url 'add_category' %}" method="POST">
+            {% csrf_token %}
             <div class="space-y-4">
                 <label for="expenseCategory" class="block mb-2 text-base font-medium text-gray-900 dark:text-white">Choose an expense category:</label>
                 <select id="expenseCategory" name="category-name" class="input-field">
@@ -126,11 +127,12 @@
                     <option value="Savings & Investments">Savings & Investments</option>
                     <option value="Debt Repayment">Debt Repayment</option>
                     <option value="Charity & Donations">Charity & Donations</option>
+                    <option value="other">Other</option>
                 </select>
 
                 <div id="otherCategoryDiv" class="hidden">
                     <label for="otherCategory" class="block mb-2 text-base font-medium text-gray-900 dark:text-white">Please specify:</label>
-                    <input type="text" id="otherCategory" name="otherCategory" class="input-field">
+                    <input type="text" id="otherCategoryInput" name="other-category" class="input-field">
                 </div>
 
                 <div class="flex items-center me-4">

@@ -83,6 +83,10 @@ def add_category(request):
     if request.method == 'POST':
         category_name = request.POST.get('category-name')
         is_essential = bool(request.POST.get('is-essential'))
+        other_category = request.POST.get('other-category')
+
+        if other_category:
+            category_name = other_category
 
         try:
             category = Category(
