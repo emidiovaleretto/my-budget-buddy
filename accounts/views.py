@@ -112,6 +112,13 @@ def add_category(request):
     return render(request, 'accounts/manage.html')
 
 
+def update_category(request, category_id):
+    category = Category.objects.get(id=category_id)
+    category.is_essential = not category.is_essential
+    category.save()
+
+    return redirect(reverse('manage'))
+
 
 def remove_category(request, category_id):
     pass

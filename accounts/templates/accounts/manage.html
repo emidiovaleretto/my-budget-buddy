@@ -157,6 +157,9 @@
                         <th scope="col" class="px-6 py-3">
                             Essential
                         </th>
+                        <th scope="col" class="px-6 py-3">
+                            <span class="sr-only">Edit</span>
+                        </th>
                     </tr>
                 </thead>
                 <tbody>
@@ -169,6 +172,9 @@
                         </th>
                         <td class="px-6 py-4">
                             {{ category.get_essential_status }}
+                        </td>
+                        <td class="px-6 py-4">
+                            <a href="{% url 'update_category' category.id %}" class="font-sans text-xs text-blue-600 dark:text-blue-500 hover:underline">Change</a>
                         </td>
                     </tr>
                     {% endfor %}
