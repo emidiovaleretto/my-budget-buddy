@@ -34,6 +34,10 @@ ALLOWED_HOSTS = [
     '8000-emidiovaleret-financeme-1dqkr60c83j.ws-us115.gitpod.io'
 ]
 
+CSRF_TRUSTED_ORIGINS = [
+    'https://8000-emidiovaleret-financeme-1dqkr60c83j.ws-us115.gitpod.io',
+]
+
 
 # Application definition
 
