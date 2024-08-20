@@ -1,4 +1,4 @@
-from datetime import date
+from datetime import date, datetime
 
 from django.urls import reverse
 from django.shortcuts import render, redirect
@@ -66,3 +66,17 @@ def new_amount(request):
             'An error occurred while adding entry'
         )
         return redirect(reverse('new_amount'))
+
+
+def view_statement(request):
+    accounts = Account.objects.all()
+    categories = Category.objects.all()
+    entries = Entry.objects.filter(date__month=datetime.now().month)
+
+    context = {
+        'accounts': accounts,
+        'categories': categories,
+        'entries': entries,
+    }
+
+    return render(request, 'statements/view_statement.html', context=context)
