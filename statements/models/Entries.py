@@ -1,4 +1,6 @@
 from django.db import models
+from django.utils.safestring import mark_safe
+
 from statements.models import ENTRIES_CHOICES
 from accounts.models.Categories import Category
 from accounts.models.Accounts import Account
@@ -14,3 +16,9 @@ class Entry(models.Model):
 
     def __str__(self):
         return self.description
+
+    @property
+    def get_type_of_entry(self):
+        if self.type_of_entry == "EX":
+            return mark_safe('<span class="badge-danger">Expense</span>')
+        return mark_safe('<span class="badge-success">Income</span>')
