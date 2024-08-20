@@ -73,6 +73,14 @@ def view_statement(request):
     categories = Category.objects.all()
     entries = Entry.objects.filter(date__month=datetime.now().month)
 
+    account_form = request.GET.get('account')
+    category_form = request.GET.get('category')
+
+    if account_form:
+        entries = entries.filter(account__id=account_form)
+    if category_form:
+        entries = entries.filter(category__id=category_form)
+
     context = {
         'accounts': accounts,
         'categories': categories,
