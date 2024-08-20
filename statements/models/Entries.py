@@ -1,4 +1,5 @@
-from statements.models import *
+from django.db import models
+from statements.models import ENTRIES_CHOICES
 from accounts.models.Categories import Category
 from accounts.models.Accounts import Account
 
@@ -13,4 +14,3 @@ class Entry(models.Model):
 
     def __str__(self):
         return self.description
-    
