@@ -1,3 +1,5 @@
+import os
+from io import BytesIO
 from datetime import date, datetime
 
 from django.urls import reverse
@@ -5,10 +7,16 @@ from django.shortcuts import render, redirect
 from django.contrib import messages
 
 from django.contrib.messages import constants
+from django.conf import settings
+from django.http import FileResponse
+
+from django.template.loader import render_to_string
 
 from accounts.models.Accounts import Account
 from accounts.models.Categories import Category
 from .models.Entries import Entry
+
+from weasyprint import HTML
 
 
 def new_amount(request):
@@ -88,3 +96,32 @@ def view_statement(request):
     }
 
     return render(request, 'statements/view_statement.html', context=context)
+
+
+def export(request):
+    entries = Entry.objects.filter(date__month=datetime.now().month)
+    print(Entry.objects.filter(date__month=datetime.now().month))
+    accounts = Account.objects.all()
+    categories = Category.objects.all()
+
+    template_path = os.path.join(settings.BASE_DIR, 'templates/partials/statement.html')
+    output_path = BytesIO()
+
+    context = {
+        'entries': entries,
+        'accounts': accounts,
+        'categories': categories
+    }
+
+    template_render = render_to_string(
+        template_path,
+        context
+    )
+
+    HTML(string=template_render).write_pdf(output_path)
+    output_path.seek(0)
+
+    return FileResponse(
+        output_path,
+        filename=f"statement-{date.today().strftime('%d-%m-%Y')}.pdf"
+    )
