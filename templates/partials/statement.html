@@ -1,0 +1,48 @@
+{% load static %}
+
+<div class="relative overflow-x-auto shadow-md sm:rounded-lg space-y-4">
+    <table class="w-full text-sm text-center rtl:text-right text-gray-500 dark:text-teal-950">
+        <thead class="text-xs text-teal-950 uppercase bg-gray-50 dark:bg-accent dark:text-teal-950">
+            <tr>
+                <th scope="col" class="px-6 py-3">
+                    Account
+                </th>
+                <th scope="col" class="px-6 py-3">
+                    Category
+                </th>
+                <th scope="col" class="px-6 py-3">
+                    Date issued
+                </th>
+                <th scope="col" class="px-6 py-3">
+                    Type
+                </th>
+                <th scope="col" class="px-6 py-3">
+                    Amount
+                </th>
+            </tr>
+        </thead>
+        <tbody>
+            {% if entries %}
+            {% for entry in entries %}
+            <tr class="border-t text-white font-medium whitespace-nowrap dark:bg-light-gray dark:border-gray-700">
+                <th scope="row" class="px-6 py-4">
+                    {{ entry.account }}
+                </th>
+                <td class="px-6 py-4">
+                    {{ entry.category }}
+                </td>
+                <td class="px-6 py-4">
+                    {{ entry.date|date:'d.m.Y' }}
+                </td>
+                <td class="px-6 py-4">
+                    {{ entry.get_type_of_entry }}
+                </td>
+                <td class="px-6 py-4">
+                    € {{ entry.amount }}
+                </td>
+            </tr>
+            {% endfor %}
+            {% endif %}
+        </tbody>
+    </table>
+</div>
