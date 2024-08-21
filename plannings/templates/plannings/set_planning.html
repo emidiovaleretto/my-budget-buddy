@@ -1,0 +1,48 @@
+{% extends 'base.html' %}
+
+{% load static %}
+
+{% block 'body' %}
+
+<section>
+    <div class="py-8 px-4 mx-auto max-w-5xl lg:py-16 space-y-16">
+        <div class="relative overflow-x-auto shadow-md sm:rounded-lg space-y-4">
+            <table class="w-full text-sm text-center rtl:text-right text-gray-500 dark:text-teal-950">
+                <thead class="text-xs text-teal-950 uppercase bg-gray-50 dark:bg-accent dark:text-teal-950">
+                    <tr>
+                        <th scope="col" class="px-6 py-3">
+                            Category
+                        </th>
+                        <th scope="col" class="px-6 py-3">
+                            Budget
+                        </th>
+                        <th scope="col" class="px-6 py-3">
+                            Action
+                        </th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% if categories %}
+                    {% for category in categories %}
+
+                    <tr class="border-t text-white font-medium whitespace-nowrap dark:bg-light-gray dark:border-gray-700">
+                        <th scope="row" class="px-6 py-4">
+                            {{ category.name }}
+                        </th>
+                        <td class="px-6 py-4">
+                            <input type="number" aria-describedby="helper-text-explanation" class="input-field" placeholder="90210" required />
+                        </td>
+                        <td class="px-6 py-4">
+                            <a href="" class="inline-flex items-center px-5 py-2.5 text-sm font-bold text-center text-teal-950 bg-accent rounded-lg focus:ring-4 focus:ring-primary-200 dark:focus:ring-primary-900 hover:bg-accent-hover">Save</a>
+                        </td>
+                    </tr>
+                    {% endfor %}
+                    {% endif %}
+                </tbody>
+            </table>
+        </div>
+    </div>
+</section>
+
+
+{% endblock %}
