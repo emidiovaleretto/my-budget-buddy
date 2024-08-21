@@ -100,7 +100,6 @@ def view_statement(request):
 
 def export(request):
     entries = Entry.objects.filter(date__month=datetime.now().month)
-    print(Entry.objects.filter(date__month=datetime.now().month))
     accounts = Account.objects.all()
     categories = Category.objects.all()
 
