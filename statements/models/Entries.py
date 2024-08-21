@@ -7,7 +7,7 @@ from accounts.models.Accounts import Account
 
 
 class Entry(models.Model):
-    amount = models.DecimalField(max_digits=5, decimal_places=2)
+    amount = models.DecimalField(max_digits=10, decimal_places=2, default=0)
     category = models.ForeignKey(Category, on_delete=models.DO_NOTHING)
     description = models.TextField()
     date = models.DateField(auto_now=False, auto_now_add=False)
