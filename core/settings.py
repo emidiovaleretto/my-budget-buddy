@@ -52,6 +52,7 @@ INSTALLED_APPS = [
     # My apps
     'accounts',
     'statements',
+    'plannings',
 
     # Tailwindcss
     'tailwind',
