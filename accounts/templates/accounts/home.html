@@ -79,8 +79,7 @@
             <div class="border-l border-l-accent pl-2">
                 <h3 class="title">Planning</h3>
             </div>
-            <a class="btn-primary"
-                href="{% url 'planning' %}">Planning management</a>
+            <button type="button" data-modal-target="planningModal" data-modal-toggle="planningModal" data-account-id="{{ categories }}" class="btn-primary">Planning Manager</button>
         </div>
     </div>
 
@@ -195,5 +194,7 @@
         </div>
     </div>
 </div>
+
+{% include 'partials/budget.html' %}
 
 {% endblock %}
