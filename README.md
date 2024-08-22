@@ -57,7 +57,8 @@
 | Updated at   | updated_at      | auto_now=True                              | DateTimeField |
 
 
-`BANK_CHOICES = (
+```
+BANK_CHOICES = (
     ("AIB", "Allied Irish Banks"),
     ("BOI", "Bank of Ireland"),
     ("PTSB", "Permanent TSB"),
@@ -67,13 +68,14 @@
     ("CU", "Credit Union"),
     ("OTH", "Other")
 )
-`
+```
 
-`ACCOUNT_TYPE_CHOICES = (
+```
+ACCOUNT_TYPE_CHOICES = (
     ("PA", "Personal Account"),
     ("BE", "Business Entity")
 )
-`
+```
 
 ### Category Table
 
@@ -100,11 +102,12 @@
 | Type of Entry | type_of_entry   | choices=ENTRIES_CHOICES, max_length=2      | CharField     |
 
 
-`ENTRIES_CHOICES = (
+```
+ENTRIES_CHOICES = (
     ("IN", "Income"),
     ("EX", ("Expense"))
 )
-`
+```
 
 [Back to top ⇧](#table-of-contents)
 
