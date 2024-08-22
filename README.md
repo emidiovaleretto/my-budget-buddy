@@ -6,6 +6,11 @@
 - [Table of Contents](#table-of-contents)
 - [Briefing](#briefing)
 - [Features](#features)
+  - [Data Storage](#data-storage)
+    - [Database schema](#database-schema)
+    - [Account Table](#account-table)
+    - [Category Table](#category-table)
+    - [Entry Table](#entry-table)
 - [Technologies Used](#technologies-used)
   - [Languages](#languages)
   - [Frameworks](#frameworks)
@@ -30,6 +35,78 @@
 - **Expense vs. Income:** Easily distinguish between your expenses and income with a clear, user-friendly interface.
 - **Essential vs. Non-Essential Expenses:** Identify essential spending and find areas where you can save.
 - **Responsive Design:** Enjoy a seamless experience across all devices, from desktop to mobile.
+
+## Data Storage
+
+### Database schema
+
+<img src="./readme-files/db_schema.png">
+
+
+### Account Table
+
+| Title        | Key In Database | Form Validation                            | Data Type     |
+| ------------ | --------------- | ------------------------------------------ | ------------- |
+| id           | id              | No Validation                              | Primary Key   |
+| Label        | label           | max_length 50                              | CharField     |
+| Bank         | bank            | max_length 4 choices=BANK_CHOICES          | CharField     |
+| Account Type | account_type    | max_length=2, choices=ACCOUNT_TYPE_CHOICES | CharField     |
+| Balance      | balance         | max_digits=10, decimal_places=2, default=0 | DecimalField  |
+| Logo         | logo            | No Validation                              | ImageField    |
+| Created at   | created_at      | auto_now_add=True                          | DateTimeField |
+| Updated at   | updated_at      | auto_now=True                              | DateTimeField |
+
+
+`BANK_CHOICES = (
+    ("AIB", "Allied Irish Banks"),
+    ("BOI", "Bank of Ireland"),
+    ("PTSB", "Permanent TSB"),
+    ("ANP", "An Post Money"),
+    ("REV", "Revolut"),
+    ("N26", "N26"),
+    ("CU", "Credit Union"),
+    ("OTH", "Other")
+)
+`
+
+`ACCOUNT_TYPE_CHOICES = (
+    ("PA", "Personal Account"),
+    ("BE", "Business Entity")
+)
+`
+
+### Category Table
+
+| Title        | Key In Database | Form Validation                            | Data Type     |
+| ------------ | --------------- | ------------------------------------------ | ------------- |
+| Id           | id              | No Validation                              | Primary Key   |
+| Name         | name            | max length 50                              | CharField     |
+| Budget       | budget          | max_digits=10, decimal_places=2, default=0 | DecimalField  |
+| Is Essential | is_essential    | default='False'                            | BooleanField  |
+| Created at   | created_at      | auto_now_add=True                          | DateTimeField |
+| Updated at   | updated_at      | auto_now=True                              | DateTimeField |
+
+
+### Entry Table
+
+| Title         | Key In Database | Form Validation                            | Data Type     |
+| ------------- | --------------- | ------------------------------------------ | ------------- |
+| Id            | id              | No Validation                              | Primary Key   |
+| Amount        | amount          | max_digits=10, decimal_places=2, default=0 | DecimalField  |
+| Category      | category        | Category, on_delete=models.DO_NOTHING      | Foreign Key   |
+| Description   | description     | No Validation                              | TextField     |
+| Date          | date            | auto_now=False, auto_now_add=False         | DateTimeField |
+| Account       | account         | Account, on_delete=models.DO_NOTHING       | Foreign Key   |
+| Type of Entry | type_of_entry   | choices=ENTRIES_CHOICES, max_length=2      | CharField     |
+
+
+`ENTRIES_CHOICES = (
+    ("IN", "Income"),
+    ("EX", ("Expense"))
+)
+`
+
+[Back to top ⇧](#table-of-contents)
 
 
 # Technologies Used
