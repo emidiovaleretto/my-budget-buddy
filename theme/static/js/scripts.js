@@ -44,6 +44,14 @@ document.addEventListener('DOMContentLoaded', function() {
             toastAlert.classList.add("hidden");
         }, 5000);
     }
+
+    let budgetInputField = document.getElementById("budget");
+    let resetBtn = document.getElementById("reset");
+
+    resetBtn.addEventListener('click', (event) => {
+        event.preventDefault();
+        budgetInputField.value = "";
+    })
 });
 
 document.querySelectorAll('.btn-danger').forEach(button => {
