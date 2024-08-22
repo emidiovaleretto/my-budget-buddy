@@ -11,9 +11,11 @@ from .utils import calculate_total
 
 def home(request):
     accounts = Account.objects.all()
+    categories = Category.objects.all()
     total_balance = calculate_total(accounts, 'balance')
     context = {
         'accounts': accounts,
+        'categories': categories,
         'total_balance': total_balance
     }
     return render(request, 'accounts/home.html', context=context)
