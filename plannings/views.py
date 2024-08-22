@@ -2,7 +2,7 @@ from django.shortcuts import render
 from accounts.models.Categories import Category
 
 
-def set_planning(request):
+def set_budget(request):
     categories = Category.objects.all()
 
     context = {
