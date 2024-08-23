@@ -3,4 +3,4 @@ ENTRIES_CHOICES = (
     ("EX", ("Expense"))
 )
 
-from .Entries import Entry
+from .Invoices import Invoice

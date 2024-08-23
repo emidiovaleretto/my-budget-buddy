@@ -1,12 +1,12 @@
 from django.db import models
 from django.utils.safestring import mark_safe
 
-from statements.models import ENTRIES_CHOICES
+from invoices.models import ENTRIES_CHOICES
 from accounts.models.Categories import Category
 from accounts.models.Accounts import Account
 
 
-class Entry(models.Model):
+class Invoice(models.Model):
     amount = models.DecimalField(max_digits=10, decimal_places=2, default=0)
     category = models.ForeignKey(Category, on_delete=models.DO_NOTHING)
     description = models.TextField()

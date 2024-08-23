@@ -14,7 +14,7 @@ from django.template.loader import render_to_string
 
 from accounts.models.Accounts import Account
 from accounts.models.Categories import Category
-from .models.Entries import Entry
+from .models.Invoices import Invoice
 
 from weasyprint import HTML
 
@@ -40,7 +40,7 @@ def new_amount(request):
     type_of_entry = request.POST.get('type')
 
     try:
-        new_entry = Entry(
+        new_entry = Invoice(
             amount=amount,
             category_id=category,
             description=description,
@@ -79,7 +79,7 @@ def new_amount(request):
 def invoice(request):
     accounts = Account.objects.all()
     categories = Category.objects.all()
-    entries = Entry.objects.filter(date__month=datetime.now().month)
+    entries = Invoice.objects.filter(date__month=datetime.now().month)
 
     account_form = request.GET.get('account')
     category_form = request.GET.get('category')
@@ -99,7 +99,7 @@ def invoice(request):
 
 
 def export(request):
-    entries = Entry.objects.filter(date__month=datetime.now().month)
+    entries = invoice.objects.filter(date__month=datetime.now().month)
     accounts = Account.objects.all()
     categories = Category.objects.all()
 
