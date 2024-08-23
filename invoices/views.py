@@ -95,11 +95,11 @@ def invoice(request):
         'entries': entries,
     }
 
-    return render(request, 'statements/view_statement.html', context=context)
+    return render(request, 'statements/invoice.html', context=context)
 
 
 def export(request):
-    entries = invoice.objects.filter(date__month=datetime.now().month)
+    entries = Invoice.objects.filter(date__month=datetime.now().month)
     accounts = Account.objects.all()
     categories = Category.objects.all()
 
