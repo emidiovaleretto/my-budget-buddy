@@ -76,7 +76,7 @@ def new_amount(request):
         return redirect(reverse('new_amount'))
 
 
-def view_statement(request):
+def invoice(request):
     accounts = Account.objects.all()
     categories = Category.objects.all()
     entries = Entry.objects.filter(date__month=datetime.now().month)
@@ -103,7 +103,7 @@ def export(request):
     accounts = Account.objects.all()
     categories = Category.objects.all()
 
-    template_path = os.path.join(settings.BASE_DIR, 'templates/partials/statement.html')
+    template_path = os.path.join(settings.BASE_DIR, 'templates/partials/invoice.html')
     output_path = BytesIO()
 
     context = {

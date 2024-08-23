@@ -1,0 +1,134 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <h1>
+        <img src="{% static 'img/logo.png' %}" alt="Logo">
+        My Budget Buddy
+    </h1>
+
+    <aside>
+      <address id="from">
+        My Budget Buddy
+        Ireland
+      </address>
+
+      <address id="to">
+        Our awesome developers
+        From all around the world
+        Earth
+      </address>
+    </aside>
+
+    <dl id="informations">
+      <dt>Invoice number</dt>
+      <dd>12345</dd>
+      <dt>Date</dt>
+      <dd>March 31, 2018</dd>
+    </dl>
+
+    <table>
+      <thead>
+        <tr>
+          <th>Description</th>
+          <th>Price</th>
+          <th>Quantity</th>
+          <th>Subtotal</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>Website design</td>
+          <td>€34.20</td>
+          <td>100</td>
+          <td>€3,420.00</td>
+        </tr>
+        <tr>
+          <td>Website development</td>
+          <td>€45.50</td>
+          <td>100</td>
+          <td>€4,550.00</td>
+        </tr>
+        <tr>
+          <td>Website integration</td>
+          <td>€25.75</td>
+          <td>100</td>
+          <td>€2,575.00</td>
+        </tr>
+      </tbody>
+    </table>
+
+    <footer>
+      <table id="total">
+        <thead>
+          <tr>
+            <th>Due by</th>
+            <th>Account number</th>
+            <th>Total due</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>May 10, 2018</td>
+            <td>132 456 789 012</td>
+            <td>€10,545.00</td>
+          </tr>
+        </tbody>
+      </table>
+    </footer>
+</body>
+</html>
+
+
+<div class="relative overflow-x-auto shadow-md sm:rounded-lg space-y-4">
+    <table class="w-full text-sm text-center rtl:text-right text-gray-500 dark:text-teal-950">
+        <thead class="text-xs text-teal-950 uppercase bg-gray-50 dark:bg-accent dark:text-teal-950">
+            <tr>
+                <th scope="col" class="px-6 py-3">
+                    Account
+                </th>
+                <th scope="col" class="px-6 py-3">
+                    Category
+                </th>
+                <th scope="col" class="px-6 py-3">
+                    Date issued
+                </th>
+                <th scope="col" class="px-6 py-3">
+                    Type
+                </th>
+                <th scope="col" class="px-6 py-3">
+                    Amount
+                </th>
+            </tr>
+        </thead>
+        <tbody>
+            {% if entries %}
+            {% for entry in entries %}
+            <tr class="border-t text-white font-medium whitespace-nowrap dark:bg-light-gray dark:border-gray-700">
+                <th scope="row" class="px-6 py-4">
+                    {{ entry.account }}
+                </th>
+                <td class="px-6 py-4">
+                    {{ entry.category }}
+                </td>
+                <td class="px-6 py-4">
+                    {{ entry.date|date:'d.m.Y' }}
+                </td>
+                <td class="px-6 py-4">
+                    {{ entry.get_type_of_entry }}
+                </td>
+                <td class="px-6 py-4">
+                    € {{ entry.amount }}
+                </td>
+            </tr>
+            {% endfor %}
+            {% endif %}
+        </tbody>
+    </table>
+</div>
