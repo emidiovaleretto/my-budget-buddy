@@ -8,10 +8,10 @@ from accounts.models.Accounts import Account
 
 class Invoice(models.Model):
     amount = models.DecimalField(max_digits=10, decimal_places=2, default=0)
-    category = models.ForeignKey(Category, on_delete=models.DO_NOTHING)
+    category = models.ForeignKey(Category, on_delete=models.CASCADE)
     description = models.TextField()
     date = models.DateField(auto_now=False, auto_now_add=False)
-    account = models.ForeignKey(Account, on_delete=models.DO_NOTHING)
+    account = models.ForeignKey(Account, on_delete=models.CASCADE)
     type_of_entry = models.CharField(choices=ENTRIES_CHOICES, max_length=2)
 
     def __str__(self):
