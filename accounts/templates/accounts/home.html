@@ -77,9 +77,21 @@
 
         <div class="card space-y-4">
             <div class="border-l border-l-accent pl-2">
-                <h3 class="title">Planning</h3>
+                <h3 class="title">My Budgets</h3>                    
             </div>
-            <button type="button" data-modal-target="planningModal" data-modal-toggle="planningModal" data-account-id="{{ categories }}" class="btn-primary">Planning Manager</button>
+            <hr class="h-px my-4 bg-gray-200 border-0 dark:bg-gray-700">
+            {% if categories %}
+            {% for category in categories %}
+            <div>
+                <h4 class="text-lg mb-1">{{ category.name }}</h4>
+                <div class="w-full bg-gray-50 rounded-full">
+                    <div class="progress-bar" style="width: {{ category.get_percenteges }}%"> {{ category.get_percenteges|floatformat:1 }}%</div>
+                </div>
+                <span class="block text-sm font-thin text-right mt-2">€ {{ category.get_total_expenses }} of € {{ category.budget }} </span>
+            </div>
+            {% endfor %}
+            {% endif %}
+            <button type="button" data-modal-target="planningModal" data-modal-toggle="planningModal" data-account-id="{{ categories }}" class="btn-primary">Budget Manager</button>
         </div>
     </div>
 
