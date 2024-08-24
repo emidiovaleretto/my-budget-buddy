@@ -27,7 +27,7 @@
 }
 
 .progress-bar {
-    @apply bg-accent text-xs font-medium text-cyan-950 text-center p-2 leading-none rounded-full
+    @apply flex justify-center items-center bg-complementary text-xs font-semibold text-cyan-950 text-center h-4 leading-none rounded-full
 }
 
 .badge-success {

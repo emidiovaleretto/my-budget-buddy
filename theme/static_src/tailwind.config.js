@@ -48,6 +48,7 @@ module.exports = {
                 'light-gray': '#2B2B2B',
                 'accent': '#69D2CD',
                 'accent-hover': '#5AC7C1',
+                'complementary': '#69a2d1', 
             },
             fontFamily: {
                 'sans': ['"Roboto", sans-serif'],
