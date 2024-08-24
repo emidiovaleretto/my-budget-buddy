@@ -22,7 +22,6 @@ document.addEventListener('DOMContentLoaded', function() {
     let form = document.querySelector('form');
 
     expenseCategory.addEventListener("change", function() {
-        console.log(expenseCategory.value)
         if (expenseCategory.value === "other") {
             otherCategoryDiv.classList.remove("hidden");
             otherCategoryInput.focus();
@@ -44,14 +43,6 @@ document.addEventListener('DOMContentLoaded', function() {
             toastAlert.classList.add("hidden");
         }, 5000);
     }
-
-    let budgetInputField = document.getElementById("budget");
-    let resetBtn = document.getElementById("reset");
-
-    resetBtn.addEventListener('click', (event) => {
-        event.preventDefault();
-        budgetInputField.value = "";
-    })
 });
 
 document.querySelectorAll('.btn-danger').forEach(button => {
@@ -63,5 +54,17 @@ document.querySelectorAll('.btn-danger').forEach(button => {
 
         const form = document.getElementById('delete-account-form');
         form.setAttribute('action', `/accounts/remove_account/${accountId}/`);
+    });
+});
+
+document.addEventListener('DOMContentLoaded', function () {
+    let budgetInputFields = document.querySelectorAll(".budget-input");
+    let resetBtn = document.getElementById("resetBudget");
+
+    resetBtn.addEventListener('click', (event) => {
+        event.preventDefault();
+        budgetInputFields.forEach((input) => {
+            input.value = "0.00";
+        });
     });
 });
