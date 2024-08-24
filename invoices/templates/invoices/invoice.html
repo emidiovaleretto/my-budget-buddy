@@ -1,0 +1,103 @@
+{% extends 'base.html' %}
+
+{% load static %}
+
+{% block 'body' %}
+
+<section>
+    <div class="py-8 px-4 mx-auto max-w-5xl lg:py-16 space-y-16">
+        <form action="{% url 'invoice' %}" method="GET">
+            <div class="flex justify-between items-center gap-4">
+                <div class="w-full">
+                    <label for="account" class="label">Account</label>
+                    {% if accounts %}
+                    <select id="account" name="account" class="input-field">
+                        {% for account in accounts %}
+                        <option value="{{ account.id }}">{{ account }}</option>
+                        {% endfor %}
+                    </select>
+                    {% endif %}
+                </div>
+                <div class="w-full">
+                    <label for="expenseCategory" class="label">Category</label>
+                    {% if categories %}
+                    <select id="expenseCategory" name="category" class="input-field">
+                        {% for category in categories %}
+                        <option value="{{ category.id }}">{{ category }}</option>
+                        {% endfor %}
+                    </select>
+                    {% endif %}
+                </div>
+                <div class="w-full">
+                    <label for="dateIssued" class="label">Date</label>
+                    <select id="dateIssued" name="date" class="input-field">
+                        <option selected>Last 7 Days</option>
+                    </select>
+                </div>
+            </div>
+            <div class="flex items-center gap-2">
+                <button type="submit" class="px-5 py-2.5 mt-4 text-sm font-bold text-center text-teal-950 bg-accent rounded-lg focus:ring-4 focus:ring-primary-200 dark:focus:ring-primary-900 hover:bg-accent-hover">
+                    Filter
+                </button>
+
+                <a href="{% url 'export' %}" aria-label="Download the statement in PDF (opens in a new tabs" target="_blank"
+                            rel="noopener" class="inline-flex items-center gap-1 mt-4 px-5 py-2.5 text-sm font-bold text-center text-teal-950 rounded-lg focus:ring-4 focus:ring-primary-200 dark:focus:ring-primary-900 border border-teal hover:bg-accent hover:font-semibold focus:outline-none focus:ring-teal-300 dark:border-teal-500 dark:text-teal-500 dark:hover:text-teal-900 dark:hover:bg-teal-500 dark:focus:ring-teal-300">
+                    <svg class="w-4 h-4 text-teal-950" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" viewBox="0 0 24 24">
+                        <path fill-rule="evenodd" d="M9 7V2.221a2 2 0 0 0-.5.365L4.586 6.5a2 2 0 0 0-.365.5H9Zm2 0V2h7a2 2 0 0 1 2 2v9.293l-2-2a1 1 0 0 0-1.414 1.414l.293.293h-6.586a1 1 0 1 0 0 2h6.586l-.293.293A1 1 0 0 0 18 16.707l2-2V20a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V9h5a2 2 0 0 0 2-2Z" clip-rule="evenodd"/>
+                    </svg>
+                    Export                          
+                </a>  
+            </div>
+        </form>
+
+        <div class="relative overflow-x-auto shadow-md sm:rounded-lg space-y-4">
+            <table class="w-full text-sm text-center rtl:text-right text-gray-500 dark:text-teal-950">
+                <thead class="text-xs text-teal-950 uppercase bg-gray-50 dark:bg-accent dark:text-teal-950">
+                    <tr>
+                        <th scope="col" class="px-6 py-3">
+                            Account
+                        </th>
+                        <th scope="col" class="px-6 py-3">
+                            Category
+                        </th>
+                        <th scope="col" class="px-6 py-3">
+                            Date issued
+                        </th>
+                        <th scope="col" class="px-6 py-3">
+                            Type
+                        </th>
+                        <th scope="col" class="px-6 py-3">
+                            Amount
+                        </th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% if entries %}
+                    {% for entry in entries %}
+                    <tr class="border-t text-white font-medium whitespace-nowrap dark:bg-light-gray dark:border-gray-700">
+                        <th scope="row" class="px-6 py-4">
+                            {{ entry.account }}
+                        </th>
+                        <td class="px-6 py-4">
+                            {{ entry.category }}
+                        </td>
+                        <td class="px-6 py-4">
+                            {{ entry.date|date:'d.m.Y' }}
+                        </td>
+                        <td class="px-6 py-4">
+                            {{ entry.get_type_of_entry }}
+                        </td>
+                        <td class="px-6 py-4">
+                            € {{ entry.amount }}
+                        </td>
+                    </tr>
+                    {% endfor %}
+                    {% endif %}
+                </tbody>
+            </table>
+        </div>
+
+    </div>
+</section>
+
+{% endblock %}

@@ -12,11 +12,12 @@ from django.http import FileResponse
 
 from django.template.loader import render_to_string
 
+from weasyprint import HTML
+
 from accounts.models.Accounts import Account
 from accounts.models.Categories import Category
 from .models.Invoices import Invoice
 
-from weasyprint import HTML
 
 
 def new_amount(request):
@@ -30,7 +31,7 @@ def new_amount(request):
             'categories': categories,
             'current_date': current_date,
         }
-        return render(request, 'statements/add_entries.html', context=context)
+        return render(request, 'invoices/add_entries.html', context=context)
 
     amount = request.POST.get('amount')
     category = request.POST.get('category-name')
@@ -95,7 +96,7 @@ def invoice(request):
         'entries': entries,
     }
 
-    return render(request, 'statements/invoice.html', context=context)
+    return render(request, 'invoices/invoice.html', context=context)
 
 
 def export(request):
