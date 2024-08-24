@@ -1,7 +1,7 @@
 from django.db import models
 from django.utils.safestring import mark_safe
 
-from incomes.models import ENTRIES_CHOICES
+from incomes.models import INCOME_TYPE_CHOICES
 from accounts.models.Categories import Category
 from accounts.models.Accounts import Account
 
@@ -12,13 +12,15 @@ class Income(models.Model):
     description = models.TextField()
     date = models.DateField(auto_now=False, auto_now_add=False)
     account = models.ForeignKey(Account, on_delete=models.CASCADE)
-    type_of_entry = models.CharField(choices=ENTRIES_CHOICES, max_length=2)
+    type_of_entry = models.CharField(choices=INCOME_TYPE_CHOICES, max_length=3)
 
     def __str__(self):
         return self.description
 
     @property
     def get_type_of_entry(self):
-        if self.type_of_entry == "EX":
+        if self.type_of_entry == "IN":
+            return mark_safe('<span class="badge-success">Income</span>')
+        elif self.type_of_entry == "EX":
             return mark_safe('<span class="badge-danger">Expense</span>')
-        return mark_safe('<span class="badge-success">Income</span>')
+        return mark_safe('<span class="badge-warning">Fixed Expense</span>')
