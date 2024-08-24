@@ -11,9 +11,8 @@ urlpatterns = [
         views.remove_account,
         name='remove_account'),
     path('add_category/', views.add_category, name='add_category'),
-    path('update_category/<int:category_id>/', views.update_category, name='update_category'),
-    path(
-        'remove_category/<int:category_id>/',
-        views.remove_category,
-        name='remove_category'),
+    path('update_category/<int:category_id>/',
+         views.update_category, 
+         name='update_category'
+         ),
 ]
