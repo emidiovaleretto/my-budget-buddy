@@ -128,7 +128,3 @@ def update_category(request, category_id):
     category.save()
 
     return redirect(reverse('manage'))
-
-
-def remove_category(request, category_id):
-    pass
