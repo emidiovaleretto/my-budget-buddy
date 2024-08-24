@@ -1,7 +1,7 @@
 {% load static %}
 
-<form action="#" method="GET" id="planningModal" tabindex="-1" aria-hidden="true"
-    class="fixed top-0 left-0 right-0 z-50 hidden w-full p-4 overflow-hidden md:inset-0 h-modal md:h-full bg-black/85">
+<form action="{% url 'update_budget' %}" method="POST" id="planningModal" tabindex="-1" aria-hidden="true"
+    class="fixed top-0 left-0 right-0 z-50 hidden w-full p-4 overflow-hidden md:inset-0 h-modal md:h-full bg-black/85">{% csrf_token %}
     <div class="relative w-full h-full max-w-md md:h-auto">
         <div class="relative rounded-lg shadow dark:bg-gray-800">
             <div class="flex items-start justify-between px-6 py-4 rounded-t">
@@ -26,6 +26,7 @@
                 <label for="budget" class="flex-1 text-base font-medium text-gray-900 dark:text-white">{{ category.name }}</label>
                 <input id="budget" type="number"
                     class="w-24 bg-white border px-2 py-1.5 border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-500 focus:border-primary-500 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500"
+                    name="budget_{{ category.id }}"
                     value="{{ category.budget }}">
             </div>
             {% endfor %}
