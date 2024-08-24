@@ -29,7 +29,7 @@ class Category(models.Model):
             .month).aggregate(Sum('amount'))
         return incomes['amount__sum'] if incomes['amount__sum'] else 0
 
-    def get_percenteges(self):
+    def get_percentage(self):
         try:
             return (self.get_total_expense() * 100) / self.budget
         except ZeroDivisionError:
