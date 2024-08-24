@@ -34,6 +34,10 @@
     @apply text-green-500 text-sm font-bold bg-green-100 rounded-full px-3 py-1 dark:bg-green-400 dark:text-green-950
 }
 
+.badge-warning {
+    @apply text-yellow-500 text-sm font-bold bg-yellow-100 rounded-full px-3 py-1 dark:bg-yellow-400 dark:text-green-950
+}
+
 .badge-danger {
     @apply text-red-500 text-sm font-bold bg-red-100 rounded-full px-3 py-1 dark:bg-red-400 dark:text-green-950
 }
