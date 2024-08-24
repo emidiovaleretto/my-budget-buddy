@@ -85,7 +85,7 @@
             <div>
                 <h4 class="text-lg mb-1">{{ category.name }}</h4>
                 <div class="w-full bg-gray-50 rounded-full">
-                    <div class="progress-bar" style="width: {{ category.get_percenteges }}%"> {{ category.get_percentage|floatformat:1 }}%</div>
+                    <div class="progress-bar" style="width: {{ category.get_percentage }}%"> {{ category.get_percentage|floatformat:1 }}%</div>
                 </div>
                 <span class="block text-sm font-thin text-right mt-2">€ {{ category.get_total_expenses }} of € {{ category.budget }} </span>
             </div>

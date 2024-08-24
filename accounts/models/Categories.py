@@ -26,7 +26,9 @@ class Category(models.Model):
 
         incomes = Income.objects.filter(category_id=self.id).filter(
             date__month=datetime.now()
-            .month).aggregate(Sum('amount'))
+            .month).exclude(
+                type_of_entry__in=['IN', 'FX']
+            ).aggregate(Sum('amount'))
         return incomes['amount__sum'] if incomes['amount__sum'] else 0
 
     def get_percentage(self):
