@@ -82,13 +82,15 @@
             <hr class="h-px my-4 bg-gray-200 border-0 dark:bg-gray-700">
             {% if categories %}
             {% for category in categories %}
+            {% if category.get_percentage_per_category != 0 %}                
             <div>
                 <h4 class="text-lg mb-1">{{ category.name }}</h4>
                 <div class="w-full bg-gray-50 rounded-full">
-                    <div class="progress-bar" style="width: {{ category.get_percentage }}%"> {{ category.get_percentage|floatformat:1 }}%</div>
+                    <div class="progress-bar" style="width: {{ category.get_percentage_per_category }}%"> {{ category.get_percentage_per_category|floatformat:0 }}%</div>
                 </div>
                 <span class="block text-sm font-thin text-right mt-2">€ {{ category.get_total_expenses }} of € {{ category.budget }} </span>
             </div>
+            {% endif %}
             {% endfor %}
             {% endif %}
             <button type="button" data-modal-target="planningModal" data-modal-toggle="planningModal" data-account-id="{{ categories }}" class="btn-primary">Budget Manager</button>
