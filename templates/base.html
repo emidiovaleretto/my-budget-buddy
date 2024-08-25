@@ -18,11 +18,16 @@
 
   <body>
 
+    
+    {% if user.is_authenticated %}
     {% include 'partials/navbar.html' %}
-
+    {% endif %}      
+      
     <main class="bg-dark-gray min-h-screen font-sans leading-normal tracking-normal text-white ">
+      
+      {% block 'accounts' %}{% endblock %}
 
-      <div class="grid items-center max-w-screen-xl mx-auto min-h-screen pb-20">
+      <div class="grid items-center max-w-screen-xl mx-auto min-h-screen">
 
         {% block 'body' %}{% endblock 'body' %}
 
@@ -30,7 +35,9 @@
       
     </main>
 
+    {% if user.is_authenticated %}
     {% include 'partials/footer.html' %}
+    {% endif %}
 
     {% block corejs %}
     <script src="{% static 'js/scripts.js' %}"></script>
