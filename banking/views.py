@@ -3,12 +3,15 @@ from django.shortcuts import render, redirect, get_object_or_404
 from django.contrib import messages
 
 from django.contrib.messages import constants
+from django.contrib.auth.decorators import login_required
+
 from banking.models import Bank
 from banking.models import Category
 
 from .utils import calculate_total
 
 
+@login_required(login_url='accounts/login/')
 def home(request):
     banks = Bank.objects.all()
     categories = Category.objects.all()
@@ -21,6 +24,7 @@ def home(request):
     return render(request, 'banks/home.html', context=context)
 
 
+@login_required(login_url='accounts/login/')
 def manage(request):
     banks = Bank.objects.all()
     categories = Category.objects.all()
@@ -33,6 +37,7 @@ def manage(request):
     return render(request, 'banks/manage.html', context=context)
 
 
+@login_required(login_url='accounts/login/')
 def add_account(request):
     label = request.POST.get('label_account')
     bank = request.POST.get('bank')
@@ -74,6 +79,7 @@ def add_account(request):
         return redirect(reverse('manage'))
 
 
+@login_required(login_url='accounts/login/')
 def remove_account(request, account_id):
     account = get_object_or_404(Bank, id=account_id)
     account.delete()
@@ -86,6 +92,7 @@ def remove_account(request, account_id):
     return redirect(reverse('manage'))
 
 
+@login_required(login_url='accounts/login/')
 def add_category(request):
     if request.method == 'POST':
         category_name = request.POST.get('category-name')
@@ -119,6 +126,7 @@ def add_category(request):
     return render(request, 'banks/manage.html')
 
 
+@login_required(login_url='accounts/login/')
 def update_category(request, category_id):
     category = Category.objects.get(id=category_id)
     category.is_essential = not category.is_essential
