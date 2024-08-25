@@ -10,13 +10,13 @@ from django.template.loader import render_to_string
 
 from weasyprint import HTML
 
-from accounts.models.Accounts import Account
-from accounts.models.Categories import Category
+from banking.models.Banks import Bank
+from banking.models.Categories import Category
 from incomes.models.Incomes import Income
 
 
 def invoice(request):
-    accounts = Account.objects.all()
+    banks = Bank.objects.all()
     categories = Category.objects.all()
     entries = Income.objects.filter(date__month=datetime.now().month)
 
@@ -24,12 +24,12 @@ def invoice(request):
     category_form = request.GET.get('category')
 
     if account_form:
-        entries = entries.filter(account__id=account_form)
+        entries = entries.filter(bank__id=account_form)
     if category_form:
         entries = entries.filter(category__id=category_form)
 
     context = {
-        'accounts': accounts,
+        'banks': banks,
         'categories': categories,
         'entries': entries,
     }
@@ -39,7 +39,7 @@ def invoice(request):
 
 def export(request):
     entries = Income.objects.filter(date__month=datetime.now().month)
-    accounts = Account.objects.all()
+    banks = Bank.objects.all()
     categories = Category.objects.all()
 
     template_path = os.path.join(
@@ -50,7 +50,7 @@ def export(request):
 
     context = {
         'entries': entries,
-        'accounts': accounts,
+        'banks': banks,
         'categories': categories
     }
 

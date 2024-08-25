@@ -2,8 +2,8 @@ from django.db import models
 from django.utils.safestring import mark_safe
 
 from incomes.models import INCOME_TYPE_CHOICES
-from accounts.models.Categories import Category
-from accounts.models.Accounts import Account
+from banking.models.Categories import Category
+from banking.models.Banks import Bank
 
 
 class Income(models.Model):
@@ -11,7 +11,7 @@ class Income(models.Model):
     category = models.ForeignKey(Category, on_delete=models.CASCADE)
     description = models.TextField()
     date = models.DateField(auto_now=False, auto_now_add=False)
-    account = models.ForeignKey(Account, on_delete=models.CASCADE)
+    bank = models.ForeignKey(Bank, on_delete=models.CASCADE)
     type_of_entry = models.CharField(choices=INCOME_TYPE_CHOICES, max_length=3)
 
     def __str__(self):

@@ -6,20 +6,20 @@ from django.contrib import messages
 
 from django.contrib.messages import constants
 
-from accounts.models.Accounts import Account
-from accounts.models.Categories import Category
+from banking.models.Banks import Bank
+from banking.models.Categories import Category
 from .models.Incomes import Income
 
 
 
 def new_income(request):
     if request.method == "GET":
-        accounts = Account.objects.all()
+        banks = Bank.objects.all()
         categories = Category.objects.all()
         current_date = date.today()
 
         context = {
-            'accounts': accounts,
+            'banks': banks,
             'categories': categories,
             'current_date': current_date,
         }
@@ -29,7 +29,7 @@ def new_income(request):
     category = request.POST.get('category-name')
     description = request.POST.get('description')
     date_entry = request.POST.get('date')
-    account = request.POST.get('account')
+    bank = request.POST.get('bank')
     type_of_entry = request.POST.get('type')
 
     try:
@@ -38,19 +38,19 @@ def new_income(request):
             category_id=category,
             description=description,
             date=date_entry,
-            account_id=account,
+            bank_id=bank,
             type_of_entry=type_of_entry
         )
         new_entry.save()
 
-        account = Account.objects.get(id=account)
+        bank = Bank.objects.get(id=bank)
 
         if type_of_entry == 'IN':
-            account.balance += int(amount)
+            bank.balance += int(amount)
         else:
-            account.balance -= int(amount)
+            bank.balance -= int(amount)
 
-        account.save()
+        bank.save()
         messages.add_message(
             request,
             constants.SUCCESS,
@@ -59,8 +59,7 @@ def new_income(request):
 
         return redirect(reverse('home'))
 
-    except Exception as e:
-        print(f'An error occurred while adding entry: {e}')
+    except Exception:
         messages.add_message(
             request,
             constants.ERROR,

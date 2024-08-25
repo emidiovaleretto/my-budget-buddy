@@ -4,7 +4,7 @@ from django.contrib import messages
 
 from django.contrib.messages import constants
 
-from accounts.models.Categories import Category
+from banking.models.Categories import Category
 
 
 def update_budget(request):

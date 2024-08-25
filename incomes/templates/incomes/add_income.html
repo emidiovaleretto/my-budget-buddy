@@ -40,12 +40,12 @@
                     <input type="date" name="date" value="{{ current_date|date:'Y-m-d' }}" id="date" class="input-field">
                 </div>
                 <div>
-                    <label for="account" class="label">Account</label>
-                    {% if accounts %}
-                    <select id="account" name="account" class="input-field">
-                        <option selected>Select the Account</option>
-                        {% for account in accounts %}
-                        <option value="{{ account.id }}">{{ account }}</option>
+                    <label for="bank" class="label">Bank</label>
+                    {% if banks %}
+                    <select id="bank" name="bank" class="input-field">
+                        <option selected>Select the bank</option>
+                        {% for bank in banks %}
+                        <option value="{{ bank.id }}">{{ bank }}</option>
                         {% endfor %}
                     </select>
                     {% endif %}            
