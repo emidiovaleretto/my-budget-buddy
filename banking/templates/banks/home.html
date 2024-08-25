@@ -1,0 +1,214 @@
+{% extends 'base.html' %}
+
+{% load static %}
+
+{% block 'title' %}Home{% endblock %}
+
+{% block 'body' %}
+
+{% if messages %}
+    
+    {% for message in messages %}
+        {% include 'partials/alert.html' %}
+    {% endfor %}
+        
+{% endif %}
+
+<div class="grid grid-cols-2 gap-8">
+    <div class="col-span-2 pt-24 space-x-6">
+        <div
+            class="inline-flex items-center px-6 py-4 text-lg font-bold text-center text-white bg-light-gray rounded-lg">
+            € 800,00
+            <span
+                class="inline-flex items-center justify-center w-4 h-4 ms-4 text-2xl font-black text-accent bg-black rounded-full">
+                <i class="fa-solid fa-circle-arrow-up"></i>
+            </span>
+        </div>
+
+
+        <div
+            class="inline-flex items-center px-6 py-4 text-lg font-bold text-center text-white bg-light-gray rounded-lg">
+            € 300,00
+            <span
+                class="inline-flex items-center justify-center w-4 h-4 ms-4 text-2xl font-black text-red-400 bg-gray-900 rounded-full">
+                <i class="fa-solid fa-circle-arrow-down"></i>
+            </span>
+        </div>
+
+    </div>    
+    <div class="space-y-10">
+        <div class="card">
+            <div class="border-l border-l-accent pl-2">
+                <h3 class="title">Current balance</h3>
+                <p class="text-base font-thin">€ {{ total_balance }}</p>
+            </div>
+            <hr class="h-px my-4 bg-gray-200 border-0 dark:bg-gray-700">
+            <div class="mb-6">
+                <h3 class="text-lg mb-4">Your Accounts</h3>
+                {% if banks %}
+                {% for bank in banks %}
+                
+                {% if bank.balance > 0 %}
+                <div class="mb-2">
+                    <div class="flex items-center bg-dark-gray py-2 px-4 rounded-md">
+                        <div>
+                            <img class="rounded-full object-fill w-10 h-10"
+                                src="{{ bank.logo.url }}"
+                                alt="{{ bank.label }} Logo">
+                        </div>
+                        <div class="ms-3 flex-1">
+                            <p class="text-base font-thin">{{ bank.label }}</p>
+                        </div>
+                        <div>
+                            <p class="text-base font-thin">€ {{ bank.balance }}</p>
+                        </div>
+                    </div>
+                </div>
+
+                {% endif %}
+                    
+                {% endfor %}
+                {% endif %}
+            </div>
+
+            <a class="btn-primary"
+                href="{% url 'manage' %}">Manage accounts</a>
+        </div>
+
+        <div class="card space-y-4">
+            <div class="border-l border-l-accent pl-2">
+                <h3 class="title">My Budgets</h3>                    
+            </div>
+            <hr class="h-px my-4 bg-gray-200 border-0 dark:bg-gray-700">
+            {% if categories %}
+            {% for category in categories %}
+            {% if category.get_percentage_per_category != 0 %}                
+            <div>
+                <h4 class="text-lg mb-1">{{ category.name }}</h4>
+                <div class="w-full bg-gray-50 rounded-full">
+                    <div class="progress-bar" style="width: {{ category.get_percentage_per_category }}%"> {{ category.get_percentage_per_category|floatformat:0 }}%</div>
+                </div>
+                <span class="block text-sm font-thin text-right mt-2">€ {{ category.get_total_expenses }} of € {{ category.budget }} </span>
+            </div>
+            {% endif %}
+            {% endfor %}
+            {% endif %}
+            <button type="button" data-modal-target="planningModal" data-modal-toggle="planningModal" data-account-id="{{ categories }}" class="btn-primary">Budget Manager</button>
+        </div>
+    </div>
+
+    <div>
+        <div class="space-y-10">
+            <div class="card">
+                <div class="flex justify-between">
+                    <div class="border-l border-l-accent pl-2">
+                        <h3 class="title">Monthly income</h3>
+                        <p class="text-base font-thin">€ 800,00</p>
+                    </div>
+                    <div class="border-r border-r-red-400 pr-2 text-right">
+                        <h3 class="title">Monthly expenses</h3>
+                        <p class="text-base font-thin">€ 1000,00</p>
+                    </div>
+                </div>
+                <hr class="h-px my-4 bg-gray-200 border-0 dark:bg-gray-700">
+                <div class="mb-6">
+                    <h3 class="text-lg mb-1">Balance remaining</h3>
+                    <p class="text-base font-semibold text-red-500">€ -200,00</p>
+                </div>
+
+                <a class="btn-primary"
+                    href="">Budget Manager</a>
+            </div>
+
+            <div class="card space-y-6">
+                <div class="pl-2 space-y-4">
+                    <h3 class="title">Financial balance</h3>
+
+                    <div>
+                        <h4 class="text-lg mb-1">Essential spending</h4>
+                        <div class="w-full bg-gray-50 rounded-full">
+                            <div class="progress-bar" style="width: 70%"> 70%</div>
+                        </div>
+                        <span class="block text-sm font-thin text-right mt-2">€ 3000,00</span>
+                    </div>
+
+                    <div>
+                        <h4 class="text-lg mb-1">Non-essential spending</h4>
+                        <div class="w-full bg-gray-50 rounded-full">
+                            <div class="progress-bar" style="width: 45%"> 45%</div>
+                        </div>
+                        <span class="block text-sm font-thin text-right mt-2">€ 500,00</span>
+                    </div>
+
+                </div>
+                <a class="btn-primary"
+                    href="">Manage accounts</a>
+            </div>
+
+            <div class="card space-y-4">
+                <div class="pl-2 space-y-4">
+                    <h3 class="title mb-2">Manage accounts</h3>
+                    <h4 class="text-lg font-medium">Upcoming bills</h4>
+                    <div class="flex items-center bg-dark-gray py-2 px-4 rounded-md">
+                        <div>
+                            <img class="rounded-full object-cover w-10 h-10"
+                                src="https://cdn2.vox-cdn.com/uploads/chorus_asset/file/6678919/10478570_10152214521608870_2744465531652776073_n.0.png"
+                                alt="">
+                        </div>
+                        <div class="ms-3 flex-1">
+                            <p class="text-base font-thin">Netflix</p>
+                        </div>
+                        <div>
+                            <p class="text-base font-thin">€ 9,90</p>
+                        </div>
+                    </div>
+                    <div class="flex items-center bg-dark-gray py-2 px-4 rounded-md">
+                        <div>
+                            <img class="rounded-full object-cover w-10 h-10"
+                                src="https://play-lh.googleusercontent.com/oPUmzO4FTj-cOnl9lW-FRYG1xX1EFWhBjvqRKvnc9RNqQq9DtoqKaB-F5-J7EEKRtJI"
+                                alt="">
+                        </div>
+                        <div class="ms-3 flex-1">
+                            <p class="text-base font-thin">West Wood CLUB</p>
+                        </div>
+                        <div>
+                            <p class="text-base font-thin">€ 67,00</p>
+                        </div>
+                    </div>
+                    <div class="flex items-center bg-dark-gray py-2 px-4 rounded-md">
+                        <div>
+                            <img class="rounded-full object-cover w-10 h-10"
+                                src="https://lumiere-a.akamaihd.net/v1/images/disney_logo_march_2024_050fef2e.png"
+                                alt="">
+                        </div>
+                        <div class="ms-3 flex-1">
+                            <p class="text-base font-thin">Disney Plus</p>
+                        </div>
+                        <div>
+                            <p class="text-base font-thin">€ 8,90</p>
+                        </div>
+                    </div>
+                    <div class="flex items-center bg-dark-gray py-2 px-4 rounded-md">
+                        <div>
+                            <img class="rounded-full object-cover w-10 h-10"
+                                src="data:image/png;base64,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"
+                                alt="">
+                        </div>
+                        <div class="ms-3 flex-1">
+                            <p class="text-base font-thin">Vodafone</p>
+                        </div>
+                        <div>
+                            <p class="text-base font-thin">€ 40,00</p>
+                        </div>
+                    </div>
+                </div>
+                <a class="btn-primary"
+                    href="">See More</a>
+            </div>
+        </div>
+    </div>
+</div>
+
+{% include 'partials/budget.html' %}
+
+{% endblock %}
