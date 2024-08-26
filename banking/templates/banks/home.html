@@ -90,10 +90,13 @@
                 </div>
                 <span class="block text-sm font-thin text-right mt-2">€ {{ category.get_total_expenses }} of € {{ category.budget }} </span>
             </div>
+            <button type="button" data-modal-target="planningModal" data-modal-toggle="planningModal" data-account-id="{{ categories }}" class="btn-primary">Budget Manager</button>
             {% endif %}
             {% endfor %}
+            {% else %}
+            <img src="{% static 'img/illustration.svg' %}" alt="No budgets found" class="w-1/2 mx-auto">
+            <p class="text-center">No budgets found</p>
             {% endif %}
-            <button type="button" data-modal-target="planningModal" data-modal-toggle="planningModal" data-account-id="{{ categories }}" class="btn-primary">Budget Manager</button>
         </div>
     </div>
 
