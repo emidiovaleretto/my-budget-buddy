@@ -1,0 +1,50 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block 'body' %}
+
+<section>
+    <div class="py-8 px-4 mx-auto max-w-2xl lg:py-16">
+        <h2 class="title">Add monthly bills</h2>
+        <hr class="h-px my-4 bg-gray-200 border-0 dark:bg-gray-700">
+        <form action="#" method="POST"> {% csrf_token %}
+            <div class="grid gap-4 sm:grid-cols-2 sm:gap-6">
+                <div class="w-full">
+                    <label for="title" class="label">Title</label>
+                    <input type="text" name="title" id="title" class="input-field" placeholder="e.g. Starbucks" required>
+                </div>
+                {% if categories %}
+                <div class="w-full">
+                    <label for="expenseCategory" class="label">Category:</label>
+                    <select id="expenseCategory" name="category-name" class="input-field">
+                        <option selected>Select the Category</option>
+                        {% for category in categories %}
+                        <option value="{{ category.id }}">{{ category }}</option>
+                        {% endfor %}
+                    </select>
+                </div>
+                {% endif %}
+                <div class="sm:col-span-2">
+                    <label for="description" class="label">Description</label>
+                    <textarea id="description" rows="8" name="description" class="input-field resize-none" placeholder="Your description here"></textarea>
+                </div>
+
+                <div class="w-full">
+                    <label for="amount" class="label">Amount</label>
+                    <input type="number" name="amount" id="amount" class="input-field" placeholder="Enter the amount" required>
+                </div>
+
+                <div class="w-full">
+                    <label for="date" class="label">Due date</label>
+                    <input type="date" name="date" value="{{ current_date|date:'Y-m-d' }}" id="date" class="input-field">
+                </div>
+
+            </div>
+            <button type="submit" class="inline-flex items-center px-5 py-2.5 mt-4 sm:mt-6 text-sm font-bold text-center text-teal-950 bg-accent rounded-lg focus:ring-4 focus:ring-primary-200 dark:focus:ring-primary-900 hover:bg-accent-hover">
+                Register
+            </button>
+        </form>
+    </div>
+</section>
+
+{% endblock %}
