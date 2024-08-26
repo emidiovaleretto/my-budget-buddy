@@ -1,13 +1,13 @@
 {% extends 'base.html' %}
 {% load static %}
-
+{% block 'extratitle' %}Add monthly bills{% endblock %}
 {% block 'body' %}
 
 <section>
     <div class="py-8 px-4 mx-auto max-w-2xl lg:py-16">
         <h2 class="title">Add monthly bills</h2>
         <hr class="h-px my-4 bg-gray-200 border-0 dark:bg-gray-700">
-        <form action="#" method="POST"> {% csrf_token %}
+        <form action="{% url 'set_up' %}" method="POST"> {% csrf_token %}
             <div class="grid gap-4 sm:grid-cols-2 sm:gap-6">
                 <div class="w-full">
                     <label for="title" class="label">Title</label>
@@ -16,7 +16,7 @@
                 {% if categories %}
                 <div class="w-full">
                     <label for="category" class="label">Category:</label>
-                    <select id="category" name="category-name" class="input-field">
+                    <select id="category" name="category" class="input-field">
                         <option selected>Select the Category</option>
                         {% for category in categories %}
                         <option value="{{ category.id }}">{{ category }}</option>
