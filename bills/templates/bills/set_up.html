@@ -11,12 +11,12 @@
             <div class="grid gap-4 sm:grid-cols-2 sm:gap-6">
                 <div class="w-full">
                     <label for="title" class="label">Title</label>
-                    <input type="text" name="title" id="title" class="input-field" placeholder="e.g. Starbucks" required>
+                    <input type="text" name="title" id="title" class="input-field" placeholder="e.g. Vodafone" required>
                 </div>
                 {% if categories %}
                 <div class="w-full">
-                    <label for="expenseCategory" class="label">Category:</label>
-                    <select id="expenseCategory" name="category-name" class="input-field">
+                    <label for="category" class="label">Category:</label>
+                    <select id="category" name="category-name" class="input-field">
                         <option selected>Select the Category</option>
                         {% for category in categories %}
                         <option value="{{ category.id }}">{{ category }}</option>
@@ -37,6 +37,12 @@
                 <div class="w-full">
                     <label for="date" class="label">Due date</label>
                     <input type="date" name="date" value="{{ current_date|date:'Y-m-d' }}" id="date" class="input-field">
+                </div>
+
+                <div>
+                    <label class="block mb-2 text-base font-medium text-gray-900 dark:text-white" for="logo">Upload Logo (optional)</label>
+                    <input class="block w-full text-base p-2.5 text-gray-900 border border-gray-300 rounded-lg cursor-pointer bg-gray-50 dark:text-gray-400 focus:outline-none dark:bg-light-gray dark:border-gray-600 dark:placeholder-gray-400" id="logo" name="logo" type="file">
+                    <p class="mt-2 text-xs text-gray-500 dark:text-gray-400">SVG, PNG, JPG or GIF (MAX. 800x400px).</p>
                 </div>
 
             </div>
