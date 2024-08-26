@@ -7,6 +7,7 @@ from django.contrib.auth.decorators import login_required
 
 from banking.models import Bank
 from banking.models import Category
+from bills.models.Bills import Payable
 
 from .utils import calculate_total
 
@@ -15,10 +16,12 @@ from .utils import calculate_total
 def home(request):
     banks = Bank.objects.all()
     categories = Category.objects.all()
+    bills = Payable.objects.all()
     total_balance = calculate_total(banks, 'balance')
     context = {
         'banks': banks,
         'categories': categories,
+        'bills': bills,
         'total_balance': total_balance
     }
     return render(request, 'banks/home.html', context=context)
