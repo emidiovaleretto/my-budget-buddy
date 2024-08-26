@@ -54,6 +54,7 @@ INSTALLED_APPS = [
     'budgets',
     'incomes',
     'invoices',
+    'bills',
 
     # Tailwindcss
     'tailwind',
