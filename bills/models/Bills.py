@@ -2,7 +2,7 @@ from django.db import models
 from banking.models.Categories import Category
 
 
-class Payable(model.Models):
+class Payable(models.Model):
     title = models.CharField(max_length=50)
     category = models.ForeignKey(Category, on_delete=models.CASCADE)
     description = models.TextField()
@@ -14,6 +14,6 @@ class Payable(model.Models):
         return self.title
     
 
-class Paid(model.Models):
+class Paid(models.Model):
     bill = models.ForeignKey(Payable, on_delete=models.CASCADE)
     paid_date = models.DateField(auto_now=False, auto_now_add=False)

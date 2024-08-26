@@ -1,3 +1,5 @@
 from django.contrib import admin
+from .models.Bills import Payable, Paid
 
-# Register your models here.
+admin.site.register(Payable)
+admin.site.register(Paid)
