@@ -1,7 +1,8 @@
+from datetime import datetime
 from django.urls import reverse
 from django.shortcuts import render, redirect
 
-from .models.Bills import Payable
+from .models.Bills import Payable, Paid
 from banking.models.Categories import Category
 from django.contrib import messages
 
@@ -51,3 +52,24 @@ def set_up(request):
     }
 
     return render(request, "bills/set_up.html", context=context)
+
+
+def view_bills(request):
+    CURRENT_MONTH = datetime.now().month
+    CURRENT_DAY = datetime.now().day
+
+    payable_bills = Payable.objects.all()
+    paid_bills = Paid.objects.filter(paid_date__month=CURRENT_MONTH).values('bill')
+    overdue_bills = payable_bills.filter(due_date__lt=CURRENT_DAY).exclude(id__in=paid_bills)
+    next_due_date_bills = payable_bills.filter(due_date__lte=CURRENT_DAY + 5).filter(due_date__gte=CURRENT_DAY).exclude(id__in=paid_bills)
+    remaining_bills = payable_bills.exclude(id__in=overdue_bills).exclude(id__in=paid_bills).exclude(id__in=next_due_date_bills)
+
+    context = {
+        'payable_bills': payable_bills,
+        'paid_bills': paid_bills,
+        'overdue_bills': overdue_bills,
+        'next_due_date_bills': next_due_date_bills,
+        'remaining_bills': remaining_bills
+    }
+
+    return render(request, 'bills/set_up.html', context=context)
