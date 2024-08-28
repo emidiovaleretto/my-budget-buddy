@@ -10,6 +10,11 @@ from django.contrib.messages import constants
 
 
 def set_up(request):
+    """
+    This function is responsible for rendering the set up page for the bills.
+    It also handles the POST request to save the bill in the database.
+    """
+
     if request.method == "POST":
         title = request.POST.get("title")
         category = request.POST.get("category")
@@ -59,10 +64,18 @@ def view_bills(request):
     CURRENT_DAY = datetime.now().day
 
     payable_bills = Payable.objects.all()
-    paid_bills = Paid.objects.filter(paid_date__month=CURRENT_MONTH).values('bill')
-    overdue_bills = payable_bills.filter(due_date__lt=CURRENT_DAY).exclude(id__in=paid_bills)
-    next_due_date_bills = payable_bills.filter(due_date__lte=CURRENT_DAY + 5).filter(due_date__gte=CURRENT_DAY).exclude(id__in=paid_bills)
-    remaining_bills = payable_bills.exclude(id__in=overdue_bills).exclude(id__in=paid_bills).exclude(id__in=next_due_date_bills)
+
+    paid_bills = Paid.objects.filter(
+        paid_date__month=CURRENT_MONTH).values('bill')
+
+    overdue_bills = payable_bills.filter(
+        due_date__day=CURRENT_DAY).exclude(id__in=paid_bills)
+
+    next_due_date_bills = payable_bills.filter(
+        due_date__day=CURRENT_DAY + 5).filter(due_date__day=CURRENT_DAY).exclude(id__in=paid_bills)
+
+    remaining_bills = payable_bills.exclude(id__in=overdue_bills).exclude(
+        id__in=paid_bills).exclude(id__in=next_due_date_bills)
 
     context = {
         'payable_bills': payable_bills,
