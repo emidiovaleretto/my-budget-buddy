@@ -59,7 +59,7 @@ def set_up(request):
     return render(request, "bills/set_up.html", context=context)
 
 
-def view_bills(request):
+def view_bill(request):
     CURRENT_MONTH = datetime.now().month
     CURRENT_DAY = datetime.now().day
 

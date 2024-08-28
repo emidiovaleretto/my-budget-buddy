@@ -88,7 +88,7 @@
                         <div class="w-full bg-gray-50 rounded-full">
                             <div class="progress-bar" style="width: {{ category.get_percentage_per_category }}%"> {{ category.get_percentage_per_category|floatformat:0 }}%</div>
                         </div>
-                        <span class="block text-sm font-thin text-right mt-2">€ {{ category.get_total_expenses }} of € {{ category.budget }} </span>
+                        <span class="block text-sm font-thin text-right mt-2">€ {{ category.get_total_expenses }} of € {{ category.budget|floatformat:0 }} </span>
                     </div>
                     {% endif %}
                 {% endfor %}
