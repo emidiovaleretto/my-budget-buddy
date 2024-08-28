@@ -53,7 +53,7 @@ document.querySelectorAll('.btn-danger').forEach(button => {
         accountIdField.value = parseInt(accountId);
 
         const form = document.getElementById('delete-account-form');
-        form.setAttribute('action', `/accounts/remove_account/${accountId}/`);
+        form.setAttribute('action', `/banking/accounts/${accountId}/`);
     });
 });
 
