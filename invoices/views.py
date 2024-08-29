@@ -1,4 +1,5 @@
 import os
+from random import randint
 from io import BytesIO
 from datetime import date, datetime
 
@@ -42,6 +43,8 @@ def export(request):
     banks = Bank.objects.all()
     categories = Category.objects.all()
 
+    current_date = datetime.now().strftime("%d-%m-%Y")
+
     template_path = os.path.join(
         settings.BASE_DIR,
         'templates/partials/invoice.html'
@@ -49,6 +52,8 @@ def export(request):
     output_path = BytesIO()
 
     context = {
+        'current_date': current_date,
+        'invoice_number': randint(10000, 99999),
         'entries': entries,
         'banks': banks,
         'categories': categories
