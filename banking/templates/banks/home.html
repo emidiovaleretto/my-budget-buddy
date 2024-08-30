@@ -18,7 +18,7 @@
     <div class="col-span-2 pt-24 space-x-6">
         <div
             class="inline-flex items-center px-6 py-4 text-lg font-bold text-center text-white bg-light-gray rounded-lg">
-            € 800,00
+            € {{ total_income }}
             <span
                 class="inline-flex items-center justify-center w-4 h-4 ms-4 text-2xl font-black text-accent bg-black rounded-full">
                 <i class="fa-solid fa-circle-arrow-up"></i>
@@ -28,7 +28,7 @@
 
         <div
             class="inline-flex items-center px-6 py-4 text-lg font-bold text-center text-white bg-light-gray rounded-lg">
-            € 300,00
+            € {{ total_expenses }}
             <span
                 class="inline-flex items-center justify-center w-4 h-4 ms-4 text-2xl font-black text-red-400 bg-gray-900 rounded-full">
                 <i class="fa-solid fa-circle-arrow-down"></i>
@@ -106,11 +106,11 @@
                 <div class="flex justify-between">
                     <div class="border-l border-l-accent pl-2">
                         <h3 class="title">Monthly income</h3>
-                        <p class="text-base font-thin">€ 800,00</p>
+                        <p class="text-base font-thin">€ {{ total_income }}</p>
                     </div>
                     <div class="border-r border-r-red-400 pr-2 text-right">
                         <h3 class="title">Monthly expenses</h3>
-                        <p class="text-base font-thin">€ 1000,00</p>
+                        <p class="text-base font-thin">€ {{ total_expenses }}</p>
                     </div>
                 </div>
                 <hr class="h-px my-4 bg-gray-200 border-0 dark:bg-gray-700">

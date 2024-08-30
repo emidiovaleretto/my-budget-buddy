@@ -7,6 +7,7 @@ from django.contrib.auth.decorators import login_required
 
 from banking.models import Bank
 from banking.models import Category
+from incomes.models.Incomes import Income
 from bills.models.Bills import Payable
 
 from .utils import calculate_total
@@ -17,11 +18,27 @@ def home(request):
     banks = Bank.objects.all()
     categories = Category.objects.all()
     bills = Payable.objects.all()
+
+    incomes = Income.objects.exclude(
+        type_of_entry__icontains='ex'
+    ).exclude(
+        type_of_entry__icontains='fix'
+    )
+
+    expenses = Income.objects.exclude(
+        type_of_entry__icontains='in'
+    )
+
     total_balance = calculate_total(banks, 'balance')
+    total_income = calculate_total(incomes, 'amount')
+    total_expenses = calculate_total(expenses, 'amount')
+
     context = {
         'banks': banks,
         'categories': categories,
         'bills': bills,
+        'total_income': total_income,
+        'total_expenses': total_expenses,
         'total_balance': total_balance
     }
     return render(request, 'banks/home.html', context=context)
