@@ -61,12 +61,21 @@ INSTALLED_APPS = [
     'theme',
     'django_browser_reload',
 
+    # Django Crispy Forms
+    'crispy_forms',
+    'crispy_tailwind',
+
     # Allauth
     'allauth',
     'allauth.account',
 ]
 
 TAILWIND_APP_NAME = 'theme'
+
+CRISPY_ALLOWED_TEMPLATE_PACKS = 'tailwind'
+CRISPY_TEMPLATE_PACK = 'tailwind'
+
+LOGIN_REDIRECT_URL = '/'
 
 INTERNAL_IPS = [
     "127.0.0.1",
