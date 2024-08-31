@@ -12,7 +12,7 @@
       html {
         color: #14213d;
         font-family: Source Sans Pro;
-        font-size: 11pt;
+        font-size: 8pt;
         line-height: 1.6;
       }
       body {
@@ -78,7 +78,7 @@
       td {
         padding-top: 7mm;
       }
-      td:last-of-type {
+      td.amount {
         color: #1ee494;
         font-weight: bold;
         text-align: right;
@@ -139,20 +139,22 @@
     <table>
       <thead>
         <tr>
-          <th>Account</th>
+          <th>Description</th>
           <th>Category</th>
           <th>Date issued</th>
           <th>Amount</th>
+          <th>Type</th>
         </tr>
       </thead>
       <tbody>
         {% if entries %}
         {% for entry in entries %}
         <tr>
-          <td>{{ entry.bank }}</td>
+          <td>{{ entry.description }}</td>
           <td>{{ entry.category }}</td>
           <td>{{ entry.date|date:"d-m-Y" }}</td>
-          <td>€{{ entry.amount }}</td>
+          <td class="amount">€{{ entry.amount }}</td>
+          <td>{{ entry.get_type_of_entry }}</td>
         </tr>
         {% endfor %}
         {% endif %}
