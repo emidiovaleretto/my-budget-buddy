@@ -33,13 +33,16 @@ def home(request):
     total_income = calculate_total(incomes, 'amount')
     total_expenses = calculate_total(expenses, 'amount')
 
+    remaining_balance = total_income - total_expenses
+
     context = {
         'banks': banks,
         'categories': categories,
         'bills': bills,
         'total_income': total_income,
         'total_expenses': total_expenses,
-        'total_balance': total_balance
+        'total_balance': total_balance,
+        'remaining_balance': remaining_balance
     }
     return render(request, 'banks/home.html', context=context)
 
