@@ -130,6 +130,15 @@ def add_category(request):
                 name=category_name,
                 is_essential=is_essential
             )
+
+            if Category.objects.filter(name=category_name).exists():
+                messages.add_message(
+                    request,
+                    constants.ERROR,
+                    'This category has been registered before.'
+                )
+                return redirect(reverse('manage'))
+
             category.save()
             messages.add_message(
                 request,
