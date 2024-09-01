@@ -71,7 +71,7 @@ INSTALLED_APPS = [
 ]
 
 TAILWIND_APP_NAME = 'theme'
-
+ACCOUNT_FORMS = {'login': 'core.forms.CustomLoginForm', 'signup': 'core.forms.CustomSignUpForm'}
 CRISPY_ALLOWED_TEMPLATE_PACKS = 'tailwind'
 CRISPY_TEMPLATE_PACK = 'tailwind'
 
