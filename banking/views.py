@@ -4,12 +4,16 @@ from django.contrib import messages
 
 from django.contrib.messages import constants
 from django.contrib.auth.decorators import login_required
+from django.core.paginator import Paginator
+
+from django.http import JsonResponse
+from django.template.loader import render_to_string
 
 from banking.models import Bank
 from banking.models import Category
 from incomes.models.Incomes import Income
-from bills.models.Bills import Payable
 
+from bills.models.Bills import Payable
 from .utils import calculate_total
 
 
@@ -52,11 +56,22 @@ def manage(request):
     banks = Bank.objects.all()
     categories = Category.objects.all()
     total = sum([bank.balance for bank in banks])
+    
+    paginator = Paginator(categories, 4)
+    page_number = request.GET.get('page')
+    per_page = paginator.get_page(page_number)
+
     context = {
         'banks': banks,
         'categories': categories,
+        'per_page': per_page,
         'total': total
     }
+
+    if request.headers.get('x-requested-with') == 'XMLHttpRequest':
+        html = render_to_string('partials/category_table.html', {'per_page' : per_page})
+        return JsonResponse({'html': html})
+
     return render(request, 'banks/manage.html', context=context)
 
 

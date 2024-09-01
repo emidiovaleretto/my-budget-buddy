@@ -68,3 +68,34 @@ document.addEventListener('DOMContentLoaded', function () {
         });
     });
 });
+
+document.addEventListener("DOMContentLoaded", function () {
+    function setupPaginationLinks() {
+        const paginationLinks = document.querySelectorAll('.pagination-link');
+
+        paginationLinks.forEach(link => {
+            link.addEventListener('click', function (e) {
+                e.preventDefault();
+
+                const url = this.href;
+
+                fetch(url, {
+                    headers: {
+                        'X-Requested-With': 'XMLHttpRequest',
+                    }
+                })
+                .then(response => response.json())
+                .then(data => {
+                    const tableContainer = document.querySelector('#table-container');
+                    tableContainer.innerHTML = data.html;
+
+                    setupPaginationLinks();
+                })
+                .catch(error => console.error('Error:', error));
+            });
+        });
+    }
+
+    setupPaginationLinks();
+});
+

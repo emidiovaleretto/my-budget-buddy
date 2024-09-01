@@ -151,40 +151,9 @@
 
     <div class="w-full mt-24">
         <h3 class="text-3xl mb-14">My Categories</h3>
-        <div class="relative overflow-x-auto shadow-md sm:rounded-lg space-y-4">
+        <div id="table-container" class="relative overflow-x-auto shadow-md sm:rounded-lg space-y-4">
             {% if categories %}
-            <table class="w-full text-sm text-center rtl:text-right text-gray-500 dark:text-teal-950">
-                <thead class="text-xs text-teal-950 uppercase bg-gray-50 dark:bg-accent dark:text-teal-950">
-                    <tr>
-                        <th scope="col" class="px-6 py-3">
-                            Categories
-                        </th>
-                        <th scope="col" class="px-6 py-3">
-                            Essential
-                        </th>
-                        <th scope="col" class="px-6 py-3">
-                            <span class="sr-only">Edit</span>
-                        </th>
-                    </tr>
-                </thead>
-                <tbody>
-                       
-                    {% for category in categories %}
-                        
-                    <tr class="border-t dark:bg-light-gray dark:border-gray-700">
-                        <th scope="row" class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">
-                            {{ category.name }}
-                        </th>
-                        <td class="px-6 py-4">
-                            {{ category.get_essential_status }}
-                        </td>
-                        <td class="px-6 py-4">
-                            <a href="{% url 'update_category' category.id %}" class="font-sans text-xs text-blue-600 dark:text-blue-500 hover:underline">Change</a>
-                        </td>
-                    </tr>
-                    {% endfor %}
-                </tbody>
-            </table>
+                {% include 'partials/category_table.html' %}
             {% else %}
             <div class="py-4 px-3 text-center rounded-md border bg-light-gray border-gray-600 placeholder-gray-400 text-white">
                 <i class="w-12 h-12 text-gray-400 font-black text-3xl fa-solid fa-layer-group"></i>
@@ -192,6 +161,7 @@
             </div>
             {% endif %}
         </div>
+        {% include 'partials/pagination.html' %}
     </div>
 </div>
 

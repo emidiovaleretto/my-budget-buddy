@@ -1,0 +1,22 @@
+<table class="w-full text-sm text-center rtl:text-right text-gray-500 dark:text-teal-950">
+    <thead class="text-xs text-teal-950 uppercase bg-gray-50 dark:bg-accent dark:text-teal-950">
+        <tr>
+            <th scope="col" class="px-6 py-3">Categories</th>
+            <th scope="col" class="px-6 py-3">Essential</th>
+            <th scope="col" class="px-6 py-3"><span class="sr-only">Edit</span></th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for category in per_page %}
+        <tr class="border-t dark:bg-light-gray dark:border-gray-700">
+            <th scope="row" class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">
+                {{ category.name }}
+            </th>
+            <td class="px-6 py-4">{{ category.get_essential_status }}</td>
+            <td class="px-6 py-4">
+                <a href="{% url 'update_category' category.id %}" class="font-sans text-xs text-blue-600 dark:text-blue-500 hover:underline">Change</a>
+            </td>
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>

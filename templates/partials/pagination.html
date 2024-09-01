@@ -1,0 +1,14 @@
+<div class="pagination flex flex-col items-center py-4">
+    <span class="text-sm text-gray-700 dark:text-gray-400">
+        Showing <span class="font-semibold text-gray-900 dark:text-white">{{ per_page.start_index }} to {{ per_page.end_index }}</span> of <span class="font-semibold text-gray-900 dark:text-white">{{ per_page.paginator.count }}</span> Categories
+    </span>
+    <div class="inline-flex mt-2 xs:mt-0">
+        {% if per_page.has_previous %}
+            <a href="?page={{ per_page.previous_page_number }}" class="pagination-link flex items-center justify-center px-3 h-8 text-sm font-medium text-white bg-gray-800 rounded-s hover:bg-gray-900 dark:bg-gray-800 dark:border-gray-700 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white">Prev</a>
+        {% endif %}
+
+        {% if per_page.has_next %}
+            <a href="?page={{ per_page.next_page_number }}" class="pagination-link flex items-center justify-center px-3 h-8 text-sm font-medium text-white bg-gray-800 border-0 border-s border-gray-700 rounded-s hover:bg-gray-900 dark:bg-gray-800 dark:border-gray-700 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white">Next</a>
+        {% endif %}
+    </div>
+</div>
