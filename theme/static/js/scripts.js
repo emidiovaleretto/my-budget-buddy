@@ -43,6 +43,61 @@ document.addEventListener('DOMContentLoaded', function() {
             toastAlert.classList.add("hidden");
         }, 5000);
     }
+
+    function setupPaginationLinks() {
+        const paginationLinks = document.querySelectorAll('.pagination-link');
+
+        paginationLinks.forEach(link => {
+            link.addEventListener('click', function (e) {
+                e.preventDefault();
+
+                const url = this.href;
+
+                fetch(url, {
+                    headers: {
+                        'X-Requested-With': 'XMLHttpRequest',
+                    }
+                })
+                .then(response => response.json())
+                .then(data => {
+                    const tableContainer = document.querySelector('#table-container');
+                    tableContainer.innerHTML = data.html;
+
+                    const paginationContainer = document.querySelector('#pagination-container');
+                    paginationContainer.innerHTML = data.pagination_html;
+
+                    history.pushState(null, '', url);
+
+                    setupPaginationLinks();
+                })
+                .catch(error => console.error('Error:', error));
+            });
+        });
+    }
+
+    setupPaginationLinks();
+
+    window.addEventListener('popstate', function () {
+        const url = window.location.href;
+
+        fetch(url, {
+            headers: {
+                'X-Requested-With': 'XMLHttpRequest',
+            }
+        })
+        .then(response => response.json())
+        .then(data => {
+            const tableContainer = document.querySelector('#table-container');
+            tableContainer.innerHTML = data.html;
+
+            const paginationContainer = document.querySelector('#pagination-container');
+            paginationContainer.innerHTML = data.pagination_html;
+
+            setupPaginationLinks();
+        })
+        .catch(error => console.error('Error:', error));
+    });
+
 });
 
 document.querySelectorAll('.btn-danger').forEach(button => {
@@ -68,34 +123,3 @@ document.addEventListener('DOMContentLoaded', function () {
         });
     });
 });
-
-document.addEventListener("DOMContentLoaded", function () {
-    function setupPaginationLinks() {
-        const paginationLinks = document.querySelectorAll('.pagination-link');
-
-        paginationLinks.forEach(link => {
-            link.addEventListener('click', function (e) {
-                e.preventDefault();
-
-                const url = this.href;
-
-                fetch(url, {
-                    headers: {
-                        'X-Requested-With': 'XMLHttpRequest',
-                    }
-                })
-                .then(response => response.json())
-                .then(data => {
-                    const tableContainer = document.querySelector('#table-container');
-                    tableContainer.innerHTML = data.html;
-
-                    setupPaginationLinks();
-                })
-                .catch(error => console.error('Error:', error));
-            });
-        });
-    }
-
-    setupPaginationLinks();
-});
-

@@ -61,16 +61,18 @@ def manage(request):
     page_number = request.GET.get('page')
     per_page = paginator.get_page(page_number)
 
+    if request.headers.get('x-requested-with') == 'XMLHttpRequest':
+        html = render_to_string('partials/category_table.html', {'per_page': per_page})
+        pagination_html = render_to_string('partials/pagination.html', {'per_page': per_page})
+        return JsonResponse({'html': html, 'pagination_html': pagination_html})
+
+
     context = {
         'banks': banks,
         'categories': categories,
         'per_page': per_page,
         'total': total
     }
-
-    if request.headers.get('x-requested-with') == 'XMLHttpRequest':
-        html = render_to_string('partials/category_table.html', {'per_page' : per_page})
-        return JsonResponse({'html': html})
 
     return render(request, 'banks/manage.html', context=context)
 
